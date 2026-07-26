@@ -1,0 +1,53 @@
+export type Capital = {
+  iso: string;
+  name: string;
+  coordinates: [number, number];
+};
+
+/** Capitals for NARA atlas region countries — [longitude, latitude] */
+export const NARA_CAPITALS: Capital[] = [
+  { iso: "AL", name: "Tirana", coordinates: [19.8187, 41.3275] },
+  { iso: "AM", name: "Yerevan", coordinates: [44.4991, 40.1792] },
+  { iso: "AT", name: "Vienna", coordinates: [16.3738, 48.2082] },
+  { iso: "AZ", name: "Baku", coordinates: [49.8671, 40.4093] },
+  { iso: "BA", name: "Sarajevo", coordinates: [18.4131, 43.8563] },
+  { iso: "BE", name: "Brussels", coordinates: [4.3517, 50.8503] },
+  { iso: "BG", name: "Sofia", coordinates: [23.3219, 42.6977] },
+  { iso: "BY", name: "Minsk", coordinates: [27.559, 53.9006] },
+  { iso: "CH", name: "Bern", coordinates: [7.4474, 46.948] },
+  { iso: "CY", name: "Nicosia", coordinates: [33.3823, 35.1856] },
+  { iso: "CZ", name: "Prague", coordinates: [14.4378, 50.0755] },
+  { iso: "DE", name: "Berlin", coordinates: [13.405, 52.52] },
+  { iso: "DK", name: "Copenhagen", coordinates: [12.5683, 55.6761] },
+  { iso: "EE", name: "Tallinn", coordinates: [24.7536, 59.437] },
+  { iso: "ES", name: "Madrid", coordinates: [-3.7038, 40.4168] },
+  { iso: "FI", name: "Helsinki", coordinates: [24.9384, 60.1699] },
+  { iso: "FR", name: "Paris", coordinates: [2.3522, 48.8566] },
+  { iso: "GB", name: "London", coordinates: [-0.1278, 51.5074] },
+  { iso: "GE", name: "Tbilisi", coordinates: [44.8271, 41.7151] },
+  { iso: "GR", name: "Athens", coordinates: [23.7275, 37.9838] },
+  { iso: "HR", name: "Zagreb", coordinates: [15.9819, 45.815] },
+  { iso: "HU", name: "Budapest", coordinates: [19.0402, 47.4979] },
+  { iso: "IE", name: "Dublin", coordinates: [-6.2603, 53.3498] },
+  { iso: "IS", name: "Reykjavik", coordinates: [-21.9426, 64.1466] },
+  { iso: "IT", name: "Rome", coordinates: [12.4964, 41.9028] },
+  { iso: "LT", name: "Vilnius", coordinates: [25.2797, 54.6872] },
+  { iso: "LU", name: "Luxembourg", coordinates: [6.1319, 49.6116] },
+  { iso: "LV", name: "Riga", coordinates: [24.1052, 56.9496] },
+  { iso: "MD", name: "Chisinau", coordinates: [28.8638, 47.0105] },
+  { iso: "ME", name: "Podgorica", coordinates: [19.2594, 42.4304] },
+  { iso: "MK", name: "Skopje", coordinates: [21.4254, 41.9981] },
+  { iso: "MT", name: "Valletta", coordinates: [14.5146, 35.8989] },
+  { iso: "NL", name: "Amsterdam", coordinates: [4.9041, 52.3676] },
+  { iso: "NO", name: "Oslo", coordinates: [10.7522, 59.9139] },
+  { iso: "PL", name: "Warsaw", coordinates: [21.0122, 52.2297] },
+  { iso: "PT", name: "Lisbon", coordinates: [-9.1393, 38.7223] },
+  { iso: "RO", name: "Bucharest", coordinates: [26.1025, 44.4268] },
+  { iso: "RS", name: "Belgrade", coordinates: [20.4489, 44.7866] },
+  { iso: "RU", name: "Moscow", coordinates: [37.6173, 55.7558] },
+  { iso: "SE", name: "Stockholm", coordinates: [18.0686, 59.3293] },
+  { iso: "SI", name: "Ljubljana", coordinates: [14.5058, 46.0569] },
+  { iso: "SK", name: "Bratislava", coordinates: [17.1077, 48.1486] },
+  { iso: "TR", name: "Ankara", coordinates: [32.8597, 39.9334] },
+  { iso: "UA", name: "Kyiv", coordinates: [30.5234, 50.4501] },
+];
