@@ -7,12 +7,12 @@ import { NarrativeSelectionProvider } from "@/components/narratives/narrative-se
 export function HomeClient() {
   return (
     <NarrativeSelectionProvider>
-      <div className="flex h-dvh flex-col overflow-hidden bg-nara-navy text-nara-off-white lg:flex-row">
-        <div className="h-[50vh] w-full lg:h-full lg:w-[75%]">
-          <MapPanel />
-        </div>
-        <div className="h-[50vh] w-full border-t border-nara-grey-200 lg:h-full lg:w-[25%] lg:border-t-0 lg:border-l">
-          <NarrativeAside />
+      <div className="relative h-dvh w-full overflow-hidden bg-nara-navy text-nara-off-white">
+        <MapPanel />
+        <div className="pointer-events-none absolute inset-0 z-30 flex justify-end p-5 sm:p-6">
+          <div className="pointer-events-auto h-full w-full max-w-[min(calc(100%-2.5rem),22rem)] sm:max-w-[min(25vw,22rem)]">
+            <NarrativeAside />
+          </div>
         </div>
       </div>
     </NarrativeSelectionProvider>

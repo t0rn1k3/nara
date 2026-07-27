@@ -4,7 +4,7 @@ import { EuropeMap } from "./europe-map";
 
 export function MapPanel() {
   return (
-    <div className="relative h-full w-full bg-[var(--map-ocean)]">
+    <div className="relative h-full w-full overflow-hidden bg-[var(--map-ocean-deep)]">
       <div
         className="pointer-events-none absolute inset-0 z-10 opacity-[0.05]"
         style={{

@@ -34,10 +34,12 @@ export function EuropeMap() {
 
   return (
     <svg
-      viewBox={`0 0 ${NARA_VIEWBOX.width} ${NARA_VIEWBOX.height}`}
+      viewBox={`${NARA_VIEWBOX.minX} ${NARA_VIEWBOX.minY} ${NARA_VIEWBOX.width} ${NARA_VIEWBOX.height}`}
+      preserveAspectRatio="xMidYMid slice"
       className="h-full w-full"
+      overflow="hidden"
       role="img"
-      aria-label="Political map of Europe showing narrative prevalence"
+      aria-label="Political map of Europe and the Caspian region showing narrative prevalence"
     >
       <defs>
         <linearGradient id="map-ocean-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -53,6 +55,8 @@ export function EuropeMap() {
       </defs>
 
       <rect
+        x={NARA_VIEWBOX.minX}
+        y={NARA_VIEWBOX.minY}
         width={NARA_VIEWBOX.width}
         height={NARA_VIEWBOX.height}
         fill="url(#map-ocean-gradient)"

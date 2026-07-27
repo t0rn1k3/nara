@@ -7,11 +7,19 @@ import countriesTopology from "../public/data/countries-110m.json";
 import { NARA_CAPITALS, type Capital } from "./capitals";
 import { numericToAlpha2 } from "./iso-numeric";
 
+/**
+ * Cropped tighter than the full 800×600 projection canvas so the frame ends
+ * just past the core cluster of capitals — this pushes outlying territory
+ * (Iceland/Reykjavik on the west and the ragged Arctic sliver of Scandinavia/
+ * Russia at the top) outside the visible viewBox instead of letting it poke in
+ * as a partial, cut-off shape. Width extends east (~25% wider than the former
+ * 75%-width map column) to include the Caspian basin and western Central Asia.
+ */
 export const NARA_VIEWBOX = {
-  width: 800,
-  height: 600,
-  minX: 0,
-  minY: 0,
+  width: 848,
+  height: 477,
+  minX: 155,
+  minY: 35,
 } as const;
 
 export const NARA_REGION_COUNTRIES = new Set<string>([
@@ -59,9 +67,13 @@ export const NARA_REGION_COUNTRIES = new Set<string>([
   "AZ",
   "TR",
   "RU",
-  "US",
-  "CA",
+  "KZ",
+  "TM",
+  "IR",
 ]);
+
+/** Eastern map boundary on the Caspian Sea — [longitude, latitude]. */
+export const MAP_EASTERN_BOUNDARY: [number, number] = [50.422816, 42.09603];
 
 /** @deprecated Use NARA_REGION_COUNTRIES — kept for skeleton compatibility */
 export const EUROPEAN_COUNTRY_IDS = NARA_REGION_COUNTRIES;
@@ -81,9 +93,9 @@ export type CapitalMarker = {
 };
 
 const projection = geoMercator()
-  .center([25, 52])
-  .scale(650)
-  .translate([400, 300]);
+  .center([14, 48.25])
+  .scale(590)
+  .translate([425, 310]);
 
 const pathGenerator = geoPath(projection);
 
@@ -131,10 +143,20 @@ export function isoFromFeature(
   return numericToAlpha2(numeric) ?? null;
 }
 
+function shouldIncludeCountry(iso: string | null): boolean {
+  return iso !== null && NARA_REGION_COUNTRIES.has(iso);
+}
+
 function buildCountryPaths(): CountryPath[] {
   return loadCountryFeatures()
     .map((countryFeature) => {
       const iso = isoFromFeature(countryFeature.id as string | number);
+      const geographicCentroid = geoCentroid(countryFeature);
+
+      if (!shouldIncludeCountry(iso)) {
+        return null;
+      }
+
       const rawPath = pathGenerator(countryFeature);
 
       if (!rawPath) {
@@ -142,7 +164,6 @@ function buildCountryPaths(): CountryPath[] {
       }
 
       const d = roundSvgPath(rawPath);
-      const geographicCentroid = geoCentroid(countryFeature);
       const projectedCentroid =
         projectCoordinates([
           geographicCentroid[0],
@@ -195,12 +216,14 @@ export function projectCoordinates(
 
 function isWithinViewBox(x: number, y: number): boolean {
   const margin = 24;
+  const maxX = NARA_VIEWBOX.minX + NARA_VIEWBOX.width;
+  const maxY = NARA_VIEWBOX.minY + NARA_VIEWBOX.height;
 
   return (
     x >= NARA_VIEWBOX.minX - margin &&
-    x <= NARA_VIEWBOX.width + margin &&
+    x <= maxX + margin &&
     y >= NARA_VIEWBOX.minY - margin &&
-    y <= NARA_VIEWBOX.height + margin
+    y <= maxY + margin
   );
 }
 

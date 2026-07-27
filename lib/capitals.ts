@@ -29,8 +29,10 @@ export const NARA_CAPITALS: Capital[] = [
   { iso: "HR", name: "Zagreb", coordinates: [15.9819, 45.815] },
   { iso: "HU", name: "Budapest", coordinates: [19.0402, 47.4979] },
   { iso: "IE", name: "Dublin", coordinates: [-6.2603, 53.3498] },
+  { iso: "IR", name: "Tehran", coordinates: [51.389, 35.6892] },
   { iso: "IS", name: "Reykjavik", coordinates: [-21.9426, 64.1466] },
   { iso: "IT", name: "Rome", coordinates: [12.4964, 41.9028] },
+  { iso: "KZ", name: "Astana", coordinates: [71.4306, 51.1694] },
   { iso: "LT", name: "Vilnius", coordinates: [25.2797, 54.6872] },
   { iso: "LU", name: "Luxembourg", coordinates: [6.1319, 49.6116] },
   { iso: "LV", name: "Riga", coordinates: [24.1052, 56.9496] },
@@ -48,6 +50,7 @@ export const NARA_CAPITALS: Capital[] = [
   { iso: "SE", name: "Stockholm", coordinates: [18.0686, 59.3293] },
   { iso: "SI", name: "Ljubljana", coordinates: [14.5058, 46.0569] },
   { iso: "SK", name: "Bratislava", coordinates: [17.1077, 48.1486] },
+  { iso: "TM", name: "Ashgabat", coordinates: [58.3833, 37.95] },
   { iso: "TR", name: "Ankara", coordinates: [32.8597, 39.9334] },
   { iso: "UA", name: "Kyiv", coordinates: [30.5234, 50.4501] },
 ];
