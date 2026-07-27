@@ -25,7 +25,6 @@ export function EuropeMap() {
   );
 
   const activeCountries = hoveredNarrative?.countries ?? [];
-  const accentColor = hoveredNarrative?.accentColor;
 
   return (
     <svg
@@ -73,7 +72,7 @@ export function EuropeMap() {
               data-iso={path.iso ?? undefined}
               data-region={path.isEuropean ? "nara" : "other"}
               className="map-country-path"
-              fill={isHighlighted && accentColor ? accentColor : defaultFill}
+              fill={isHighlighted ? "var(--map-highlight)" : defaultFill}
               fillOpacity={isHighlighted ? 0.85 : 1}
               stroke="var(--map-border)"
               strokeWidth={0.5}
