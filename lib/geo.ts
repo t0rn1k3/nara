@@ -87,6 +87,22 @@ const projection = geoMercator()
 
 const pathGenerator = geoPath(projection);
 
+/** Stable decimals for SSR/client hydration — sub-pixel at 800×600. */
+const PROJECTION_PRECISION = 2;
+
+function roundProjection(value: number): number {
+  const factor = 10 ** PROJECTION_PRECISION;
+  return Math.round(value * factor) / factor;
+}
+
+function roundSvgPath(path: string): string {
+  return path.replace(/-?\d*\.?\d+(?:e[-+]?\d+)?/gi, (match) => {
+    const value = Number(match);
+    if (!Number.isFinite(value)) return match;
+    return String(roundProjection(value));
+  });
+}
+
 let countryPathsCache: CountryPath[] | null = null;
 let centroidsCache: Map<string, [number, number]> | null = null;
 let capitalMarkersCache: CapitalMarker[] | null = null;
@@ -119,23 +135,25 @@ function buildCountryPaths(): CountryPath[] {
   return loadCountryFeatures()
     .map((countryFeature) => {
       const iso = isoFromFeature(countryFeature.id as string | number);
-      const d = pathGenerator(countryFeature);
+      const rawPath = pathGenerator(countryFeature);
 
-      if (!d) {
+      if (!rawPath) {
         return null;
       }
 
+      const d = roundSvgPath(rawPath);
       const geographicCentroid = geoCentroid(countryFeature);
-      const projectedCentroid = projection(geographicCentroid) ?? [0, 0];
+      const projectedCentroid =
+        projectCoordinates([
+          geographicCentroid[0],
+          geographicCentroid[1],
+        ]) ?? ([0, 0] as [number, number]);
 
       return {
         d,
         iso,
         isEuropean: iso ? NARA_REGION_COUNTRIES.has(iso) : false,
-        centroid: [projectedCentroid[0], projectedCentroid[1]] as [
-          number,
-          number,
-        ],
+        centroid: projectedCentroid,
       };
     })
     .filter((entry): entry is CountryPath => entry !== null);
@@ -172,7 +190,7 @@ export function projectCoordinates(
     return null;
   }
 
-  return [projected[0], projected[1]];
+  return [roundProjection(projected[0]), roundProjection(projected[1])];
 }
 
 function isWithinViewBox(x: number, y: number): boolean {
@@ -187,7 +205,7 @@ function isWithinViewBox(x: number, y: number): boolean {
 }
 
 function buildCapitalMarkers(capitals: Capital[]): CapitalMarker[] {
-  return capitals.flatMap((capital) => {
+  const markers = capitals.flatMap((capital) => {
     const projected = projectCoordinates(capital.coordinates);
 
     if (!projected) {
@@ -202,6 +220,8 @@ function buildCapitalMarkers(capitals: Capital[]): CapitalMarker[] {
 
     return [{ iso: capital.iso, name: capital.name, x, y }];
   });
+
+  return markers;
 }
 
 export function getCapitalMarkers(): CapitalMarker[] {

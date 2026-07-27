@@ -3,13 +3,19 @@ export type NarrativeTimelineEntry = {
   label: string;
 };
 
+/** 0–1 scale: 1 = central originator, lower = peripheral adoption */
+export type NarrativeCountry = {
+  iso: string;
+  strength: number;
+};
+
 export type Narrative = {
   id: string;
   slug: string;
   name: string;
   category: string;
   overview: string;
-  countries: string[];
+  countries: NarrativeCountry[];
   accentColor: string;
   timeline: NarrativeTimelineEntry[];
   actors: string[];

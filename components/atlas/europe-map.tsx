@@ -7,6 +7,7 @@ import {
   getCountryPaths,
   NARA_VIEWBOX,
 } from "@/lib/geo";
+import { narrativeCountryFill, NARRATIVE_GLOW_THRESHOLD } from "@/lib/map-colors";
 import { narratives } from "@/lib/narratives";
 
 import { useNarrativeSelection } from "@/components/narratives/narrative-selection-context";
@@ -24,7 +25,12 @@ export function EuropeMap() {
     [hoveredId],
   );
 
-  const activeCountries = hoveredNarrative?.countries ?? [];
+  const strengthByIso = useMemo(() => {
+    if (!hoveredNarrative) return new Map<string, number>();
+    return new Map(
+      hoveredNarrative.countries.map(({ iso, strength }) => [iso, strength]),
+    );
+  }, [hoveredNarrative]);
 
   return (
     <svg
@@ -54,16 +60,19 @@ export function EuropeMap() {
 
       <g id="country-regions" filter="url(#map-soft-shadow)">
         {paths.map((path) => {
-          const isHighlighted =
-            Boolean(path.iso) && activeCountries.includes(path.iso!);
+          const strength = path.iso ? strengthByIso.get(path.iso) : undefined;
+          const isActive = strength !== undefined;
           const isDimmed =
-            Boolean(hoveredId) &&
-            Boolean(path.iso) &&
-            !activeCountries.includes(path.iso!);
+            Boolean(hoveredId) && Boolean(path.iso) && !isActive;
 
           const defaultFill = path.isEuropean
             ? "var(--map-land)"
             : "var(--map-land-muted)";
+
+          const fill = isActive
+            ? narrativeCountryFill(strength)
+            : defaultFill;
+          const showGlow = isActive && strength >= NARRATIVE_GLOW_THRESHOLD;
 
           return (
             <path
@@ -71,14 +80,15 @@ export function EuropeMap() {
               d={path.d}
               data-iso={path.iso ?? undefined}
               data-region={path.isEuropean ? "nara" : "other"}
+              data-strength={isActive ? strength : undefined}
               className="map-country-path"
-              fill={isHighlighted ? "var(--map-highlight)" : defaultFill}
-              fillOpacity={isHighlighted ? 0.85 : 1}
+              fill={fill}
+              fillOpacity={isActive && showGlow ? 0.85 : 1}
               stroke="var(--map-border)"
               strokeWidth={0.5}
               strokeLinejoin="round"
               opacity={isDimmed ? 0.4 : 1}
-              filter={isHighlighted ? "url(#map-country-glow)" : undefined}
+              filter={showGlow ? "url(#map-country-glow)" : undefined}
               style={{ transition: MAP_PATH_TRANSITION }}
             />
           );

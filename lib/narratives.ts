@@ -1,4 +1,8 @@
-import type { Narrative } from "./types";
+import type { Narrative, NarrativeCountry } from "./types";
+
+function nc(iso: string, strength: number): NarrativeCountry {
+  return { iso, strength };
+}
 
 export const narratives: Narrative[] = [
   {
@@ -8,7 +12,15 @@ export const narratives: Narrative[] = [
     category: "State Control",
     overview:
       "A legal and rhetorical frame used to discredit independent media, NGOs, and civil society by labelling them as instruments of foreign influence. Originating in post-Soviet legislation, the narrative has diffused across Central Europe and the Caucasus as governments tighten information controls.",
-    countries: ["RU", "BY", "HU", "GE", "KZ", "AZ", "TR"],
+    countries: [
+      nc("RU", 1),
+      nc("BY", 0.9),
+      nc("HU", 0.55),
+      nc("GE", 0.65),
+      nc("KZ", 0.75),
+      nc("AZ", 0.5),
+      nc("TR", 0.4),
+    ],
     accentColor: "#9B6B6B",
     timeline: [
       { year: 2012, label: "Russia adopts foreign-agent law targeting NGOs" },
@@ -41,7 +53,15 @@ export const narratives: Narrative[] = [
     category: "Populism",
     overview:
       "A populist discourse asserting national self-determination against supranational institutions, migration policy, and perceived external interference. Deployed across the political spectrum to legitimise unilateral action and resist EU or NATO policy coordination.",
-    countries: ["PL", "HU", "SK", "CZ", "IT", "FR", "GB"],
+    countries: [
+      nc("PL", 0.75),
+      nc("HU", 0.85),
+      nc("SK", 0.7),
+      nc("CZ", 0.55),
+      nc("IT", 0.5),
+      nc("FR", 0.45),
+      nc("GB", 0.8),
+    ],
     accentColor: "#C4A265",
     timeline: [
       { year: 2016, label: "Brexit referendum frames sovereignty as core issue" },
@@ -74,7 +94,14 @@ export const narratives: Narrative[] = [
     category: "Anti-Democracy",
     overview:
       "A counter-narrative portraying liberal democratic norms — minority rights, judicial independence, press freedom — as authoritarian impositions by elites. Used to delegitimise opposition, courts, and civil society as undemocratic while consolidating executive power.",
-    countries: ["RU", "BY", "HU", "PL", "SK", "RS"],
+    countries: [
+      nc("RU", 1),
+      nc("BY", 0.85),
+      nc("HU", 0.8),
+      nc("PL", 0.75),
+      nc("SK", 0.55),
+      nc("RS", 0.5),
+    ],
     accentColor: "#9B6B6B",
     timeline: [
       { year: 2014, label: "Term gains traction in Russian state media" },
@@ -107,7 +134,16 @@ export const narratives: Narrative[] = [
     category: "Culture War",
     overview:
       "A civilisational narrative positioning conservative social norms — family, religion, national heritage — against perceived Western liberal decadence. Central to Russia's soft-power diplomacy and replicated by allied movements across Eastern and Southern Europe.",
-    countries: ["RU", "HU", "PL", "RO", "RS", "SK", "GE", "TR"],
+    countries: [
+      nc("RU", 1),
+      nc("HU", 0.85),
+      nc("PL", 0.75),
+      nc("RO", 0.55),
+      nc("RS", 0.6),
+      nc("SK", 0.5),
+      nc("GE", 0.45),
+      nc("TR", 0.5),
+    ],
     accentColor: "#C4A265",
     timeline: [
       { year: 2013, label: "Russia passes 'gay propaganda' law" },
@@ -140,7 +176,17 @@ export const narratives: Narrative[] = [
     category: "Extremism",
     overview:
       "A conspiratorial narrative claiming deliberate demographic replacement of native European populations through migration and low birth rates. Rooted in far-right theory, it has entered mainstream political discourse and motivated violence across Western Europe.",
-    countries: ["FR", "DE", "IT", "HU", "PL", "AT", "BE", "SE", "NL"],
+    countries: [
+      nc("FR", 0.85),
+      nc("DE", 0.55),
+      nc("IT", 0.65),
+      nc("HU", 0.75),
+      nc("PL", 0.7),
+      nc("AT", 0.6),
+      nc("BE", 0.5),
+      nc("SE", 0.45),
+      nc("NL", 0.4),
+    ],
     accentColor: "#9B6B6B",
     timeline: [
       { year: 2011, label: "Renaud Camus publishes replacement thesis" },
@@ -173,7 +219,15 @@ export const narratives: Narrative[] = [
     category: "Ukraine War",
     overview:
       "A framing that positions Russia's invasion of Ukraine as a defensive or peace-seeking action, while portraying Western military aid as escalation. Amplified through diplomatic channels, state media, and sympathetic political actors across Europe.",
-    countries: ["RU", "BY", "DE", "FR", "IT", "HU", "RS"],
+    countries: [
+      nc("RU", 1),
+      nc("BY", 0.9),
+      nc("DE", 0.55),
+      nc("FR", 0.5),
+      nc("IT", 0.45),
+      nc("HU", 0.75),
+      nc("RS", 0.6),
+    ],
     accentColor: "#7BA3BC",
     timeline: [
       { year: 2022, label: "Full-scale invasion launched; 'special operation' framing" },
@@ -206,7 +260,15 @@ export const narratives: Narrative[] = [
     category: "Ukraine War",
     overview:
       "A geopolitical narrative attributing European insecurity to NATO enlargement and Western military presence rather than Russian aggression. Used to justify territorial claims, oppose defence spending, and fracture transatlantic solidarity.",
-    countries: ["RU", "BY", "RS", "HU", "CN", "TR", "DE"],
+    countries: [
+      nc("RU", 1),
+      nc("BY", 0.9),
+      nc("RS", 0.65),
+      nc("HU", 0.7),
+      nc("CN", 0.55),
+      nc("TR", 0.45),
+      nc("DE", 0.4),
+    ],
     accentColor: "#7BA3BC",
     timeline: [
       { year: 2014, label: "Crimea annexation accompanied by NATO-blame rhetoric" },
@@ -239,7 +301,16 @@ export const narratives: Narrative[] = [
     category: "Geopolitics",
     overview:
       "A broad civilisational narrative positioning the West as decadent, imperial, and hostile to alternative political models. Serves as an umbrella frame linking decolonisation rhetoric, multipolarity advocacy, and opposition to US/EU leadership.",
-    countries: ["RU", "BY", "CN", "IR", "RS", "HU", "TR", "SA"],
+    countries: [
+      nc("RU", 1),
+      nc("BY", 0.85),
+      nc("CN", 0.7),
+      nc("IR", 0.65),
+      nc("RS", 0.6),
+      nc("HU", 0.55),
+      nc("TR", 0.5),
+      nc("SA", 0.45),
+    ],
     accentColor: "#9B6B6B",
     timeline: [
       { year: 2008, label: "Russia-Georgia war reframed as Western proxy conflict" },
@@ -272,7 +343,16 @@ export const narratives: Narrative[] = [
     category: "Populism",
     overview:
       "A narrative emphasising ethnic or cultural homogeneity as the foundation of legitimate statehood. Invoked to restrict minority rights, resist immigration, and challenge multicultural or federal models of citizenship across Europe.",
-    countries: ["PL", "HU", "FR", "IT", "ES", "GR", "TR", "RS"],
+    countries: [
+      nc("PL", 0.8),
+      nc("HU", 0.85),
+      nc("FR", 0.75),
+      nc("IT", 0.7),
+      nc("ES", 0.55),
+      nc("GR", 0.5),
+      nc("TR", 0.6),
+      nc("RS", 0.45),
+    ],
     accentColor: "#C4A265",
     timeline: [
       { year: 2010, label: "Orbán declares 'illiberal democracy' rooted in nation" },
@@ -305,7 +385,15 @@ export const narratives: Narrative[] = [
     category: "Conspiracy",
     overview:
       "A conspiratorial frame attributing political and economic crises to coordinated action by transnational elites — Davos, George Soros, the World Economic Forum. Bridges left and right anti-establishment movements and feeds distrust in democratic institutions.",
-    countries: ["RU", "HU", "PL", "IT", "FR", "US", "DE"],
+    countries: [
+      nc("RU", 0.7),
+      nc("HU", 0.9),
+      nc("PL", 0.55),
+      nc("IT", 0.5),
+      nc("FR", 0.45),
+      nc("US", 0.65),
+      nc("DE", 0.4),
+    ],
     accentColor: "#C4A265",
     timeline: [
       { year: 2015, label: "Soros conspiracy enters Hungarian government campaigns" },
