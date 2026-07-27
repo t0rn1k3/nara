@@ -13,7 +13,7 @@ type NarrativeItemProps = {
 export function NarrativeItem({ narrative }: NarrativeItemProps) {
   const { hoveredId, setHoveredId, clearHover, setSelectedId } =
     useNarrativeSelection();
-  const isHovered = hoveredId === narrative.id;
+  const isActive = hoveredId === narrative.id;
 
   return (
     <li>
@@ -24,9 +24,23 @@ export function NarrativeItem({ narrative }: NarrativeItemProps) {
         onFocus={() => setHoveredId(narrative.id)}
         onBlur={clearHover}
         onClick={() => setSelectedId(narrative.id)}
-        aria-current={isHovered ? "true" : undefined}
+        aria-current={isActive ? "true" : undefined}
+        className={`narrative-item block border-l-2 px-6 py-6 transition-[background-color,border-color] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-nara-navy/30 ${
+          isActive
+            ? "bg-nara-navy/6"
+            : "border-transparent hover:bg-nara-navy/4"
+        }`}
+        style={{
+          borderLeftColor: isActive ? narrative.accentColor : undefined,
+          ["--item-accent" as string]: narrative.accentColor,
+        }}
       >
-        <span>{narrative.name}</span>
+        <span className="font-serif text-lg leading-snug text-nara-navy">
+          {narrative.name}
+        </span>
+        <span className="mt-1.5 block font-mono text-[10px] tracking-wide text-nara-grey-300">
+          {narrative.category} · {narrative.yearFrom}–{narrative.yearTo}
+        </span>
       </Link>
     </li>
   );
