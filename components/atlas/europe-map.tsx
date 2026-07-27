@@ -1,19 +1,38 @@
+"use client";
+
+import { useMemo } from "react";
+
 import {
   getCapitalMarkers,
   getCountryPaths,
   NARA_VIEWBOX,
 } from "@/lib/geo";
+import { narratives } from "@/lib/narratives";
+
+import { useNarrativeSelection } from "@/components/narratives/narrative-selection-context";
+
+const MAP_PATH_TRANSITION =
+  "fill 400ms ease, opacity 400ms ease, filter 400ms ease";
 
 export function EuropeMap() {
   const paths = getCountryPaths();
   const capitals = getCapitalMarkers();
+  const { hoveredId } = useNarrativeSelection();
+
+  const hoveredNarrative = useMemo(
+    () => narratives.find((narrative) => narrative.id === hoveredId) ?? null,
+    [hoveredId],
+  );
+
+  const activeCountries = hoveredNarrative?.countries ?? [];
+  const accentColor = hoveredNarrative?.accentColor;
 
   return (
     <svg
       viewBox={`0 0 ${NARA_VIEWBOX.width} ${NARA_VIEWBOX.height}`}
       className="h-full w-full"
       role="img"
-      aria-label="Political map of Europe with capital cities"
+      aria-label="Political map of Europe showing narrative prevalence"
     >
       <defs>
         <linearGradient id="map-ocean-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -22,6 +41,9 @@ export function EuropeMap() {
         </linearGradient>
         <filter id="map-soft-shadow" x="-2%" y="-2%" width="104%" height="104%">
           <feDropShadow dx="0" dy="1" stdDeviation="1.5" floodOpacity="0.12" />
+        </filter>
+        <filter id="map-country-glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="2" floodOpacity="0.35" />
         </filter>
       </defs>
 
@@ -32,18 +54,36 @@ export function EuropeMap() {
       />
 
       <g id="country-regions" filter="url(#map-soft-shadow)">
-        {paths.map((path) => (
-          <path
-            key={path.iso ?? path.d.slice(0, 32)}
-            d={path.d}
-            data-iso={path.iso ?? undefined}
-            data-region={path.isEuropean ? "nara" : "other"}
-            fill={path.isEuropean ? "var(--map-land)" : "var(--map-land-muted)"}
-            stroke="var(--map-border)"
-            strokeWidth={0.5}
-            strokeLinejoin="round"
-          />
-        ))}
+        {paths.map((path) => {
+          const isHighlighted =
+            Boolean(path.iso) && activeCountries.includes(path.iso!);
+          const isDimmed =
+            Boolean(hoveredId) &&
+            Boolean(path.iso) &&
+            !activeCountries.includes(path.iso!);
+
+          const defaultFill = path.isEuropean
+            ? "var(--map-land)"
+            : "var(--map-land-muted)";
+
+          return (
+            <path
+              key={path.iso ?? path.d.slice(0, 32)}
+              d={path.d}
+              data-iso={path.iso ?? undefined}
+              data-region={path.isEuropean ? "nara" : "other"}
+              className="map-country-path"
+              fill={isHighlighted && accentColor ? accentColor : defaultFill}
+              fillOpacity={isHighlighted ? 0.85 : 1}
+              stroke="var(--map-border)"
+              strokeWidth={0.5}
+              strokeLinejoin="round"
+              opacity={isDimmed ? 0.4 : 1}
+              filter={isHighlighted ? "url(#map-country-glow)" : undefined}
+              style={{ transition: MAP_PATH_TRANSITION }}
+            />
+          );
+        })}
       </g>
 
       <g id="capital-cities">

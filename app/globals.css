@@ -37,3 +37,13 @@ body {
   color: var(--nara-off-white);
   font-family: var(--font-sans);
 }
+
+.map-country-path {
+  transition: fill 400ms ease, opacity 400ms ease, filter 400ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-country-path {
+    transition: none;
+  }
+}
