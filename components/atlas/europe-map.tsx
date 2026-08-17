@@ -24,9 +24,6 @@ export function EuropeMap() {
   }, [hoveredNarrative]);
 
   return (
-    <EuropeMapSvg
-      strengthByIso={strengthByIso}
-      dimInactive={Boolean(hoveredId)}
-    />
+    <EuropeMapSvg strengthByIso={strengthByIso} />
   );
 }

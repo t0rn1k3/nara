@@ -41,8 +41,21 @@ export function EuropeMapSvg({
           <stop offset="0%" stopColor="var(--map-ocean)" />
           <stop offset="100%" stopColor="var(--map-ocean-deep)" />
         </linearGradient>
-        <filter id="map-soft-shadow" x="-2%" y="-2%" width="104%" height="104%">
-          <feDropShadow dx="0" dy="1" stdDeviation="1.5" floodOpacity="0.12" />
+        <filter id="map-soft-shadow" x="-8%" y="-8%" width="116%" height="116%">
+          <feDropShadow
+            dx="0"
+            dy="1.5"
+            stdDeviation="1.25"
+            floodColor="#0b1426"
+            floodOpacity="0.16"
+          />
+          <feDropShadow
+            dx="0"
+            dy="3.5"
+            stdDeviation="3.5"
+            floodColor="#0b1426"
+            floodOpacity="0.12"
+          />
         </filter>
         <filter id="map-country-glow" x="-20%" y="-20%" width="140%" height="140%">
           <feDropShadow dx="0" dy="0" stdDeviation="2" floodOpacity="0.35" />

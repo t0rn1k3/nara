@@ -14,7 +14,7 @@ export function NarrativeAside() {
   }, []);
 
   return (
-    <aside className="flex h-full max-h-full flex-col overflow-hidden rounded-xl border border-nara-grey-300/25 bg-nara-off-white/95 text-nara-navy shadow-[0_8px_32px_rgba(11,20,38,0.12)] backdrop-blur-sm">
+    <aside className="flex h-full max-h-full flex-col overflow-hidden rounded-xl border border-nara-grey-300/25 bg-nara-light-green/95 text-nara-navy shadow-[0_8px_32px_rgba(11,20,38,0.12)] backdrop-blur-sm">
       <AsideMasthead />
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
         <div ref={listRef}>

@@ -1,5 +1,5 @@
-const MAP_LAND = "#e8dcc8";
-const MAP_HIGHLIGHT = "#c4a265";
+const MAP_LAND = "#43474e";
+const MAP_HIGHLIGHT = "#d8bd8a";
 
 function parseHex(hex: string): [number, number, number] {
   const value = hex.replace("#", "");
@@ -16,7 +16,7 @@ function toHex([r, g, b]: [number, number, number]): string {
     .join("")}`;
 }
 
-/** Blend land brown toward highlight gold by narrative strength (0–1). */
+/** Blend dark-gray land toward the light-gold highlight by narrative strength (0–1). */
 export function narrativeCountryFill(strength: number): string {
   const t = Math.min(1, Math.max(0, strength));
   const [r1, g1, b1] = parseHex(MAP_LAND);
