@@ -1,5 +1,4 @@
-const MAP_LAND = "#43474e";
-const MAP_HIGHLIGHT = "#d8bd8a";
+const MAP_HIGHLIGHT = "#F4CE00";
 
 function parseHex(hex: string): [number, number, number] {
   const value = hex.replace("#", "");
@@ -10,23 +9,12 @@ function parseHex(hex: string): [number, number, number] {
   ];
 }
 
-function toHex([r, g, b]: [number, number, number]): string {
-  return `#${[r, g, b]
-    .map((channel) => Math.round(channel).toString(16).padStart(2, "0"))
-    .join("")}`;
-}
-
-/** Blend dark-gray land toward the light-gold highlight by narrative strength (0–1). */
+/** Fade from transparent to the highlight by narrative strength (0–1). */
 export function narrativeCountryFill(strength: number): string {
   const t = Math.min(1, Math.max(0, strength));
-  const [r1, g1, b1] = parseHex(MAP_LAND);
-  const [r2, g2, b2] = parseHex(MAP_HIGHLIGHT);
+  const [r, g, b] = parseHex(MAP_HIGHLIGHT);
 
-  return toHex([
-    r1 + (r2 - r1) * t,
-    g1 + (g2 - g1) * t,
-    b1 + (b2 - b1) * t,
-  ]);
+  return `rgba(${r}, ${g}, ${b}, ${t})`;
 }
 
 /** Full highlight + glow only for the strongest adopters. */

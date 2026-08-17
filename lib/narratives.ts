@@ -15,11 +15,11 @@ export const narratives: Narrative[] = [
     countries: [
       nc("RU", 1),
       nc("BY", 0.9),
-      nc("HU", 0.55),
+      nc("HU", 0.65),
       nc("GE", 0.65),
-      nc("KZ", 0.75),
-      nc("AZ", 0.5),
-      nc("TR", 0.4),
+      nc("KZ", 0.85),
+      nc("AZ", 0.60),
+      nc("TR", 0.50),
     ],
     accentColor: "#9B6B6B",
     timeline: [

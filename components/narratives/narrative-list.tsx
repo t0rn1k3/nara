@@ -12,11 +12,11 @@ export function NarrativeList() {
       <header className="flex items-baseline justify-between gap-3 px-4 pb-3">
         <h2
           id="narrative-list-heading"
-          className="font-mono text-[10px] tracking-[0.16em] text-nara-grey-300 uppercase"
+          className="font-mono text-[10px] tracking-[0.16em] uppercase"
         >
           Political Narratives
         </h2>
-        <span className="font-mono text-[10px] tracking-wide text-nara-grey-300 tabular-nums">
+        <span className="font-mono text-[10px] tracking-wide tabular-nums">
           {narratives.length} tracked
         </span>
       </header>

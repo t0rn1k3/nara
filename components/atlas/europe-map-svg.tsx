@@ -95,7 +95,7 @@ export function EuropeMapSvg({
               data-strength={isActive ? strength : undefined}
               className="map-country-path"
               fill={fill}
-              fillOpacity={isActive && showGlow ? 0.85 : 1}
+              fillOpacity={1}
               stroke="var(--map-border)"
               strokeWidth={0.5}
               strokeLinejoin="round"
@@ -109,7 +109,7 @@ export function EuropeMapSvg({
 
       {showCapitals ? (
         <g id="capital-cities">
-          {capitals.map((capital) => (
+          {capitals.filter((capital) => capital.iso !== "IR").map((capital) => (
             <g key={capital.iso} transform={`translate(${capital.x}, ${capital.y})`}>
               <circle
                 r={2.5}
@@ -121,9 +121,9 @@ export function EuropeMapSvg({
                 x={5}
                 y={3}
                 fill="var(--map-capital-label)"
-                fontSize={6}
+                fontSize={8}
                 fontFamily="var(--font-sans)"
-                fontWeight={500}
+                fontWeight={900}
               >
                 {capital.country}
               </text>

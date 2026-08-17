@@ -8,18 +8,16 @@ import { NARA_CAPITALS, type Capital } from "./capitals";
 import { numericToAlpha2 } from "./iso-numeric";
 
 /**
- * Cropped tighter than the full 800×600 projection canvas so the frame ends
- * just past the core cluster of capitals — this pushes outlying territory
- * (Iceland/Reykjavik on the west and the ragged Arctic sliver of Scandinavia/
- * Russia at the top) outside the visible viewBox instead of letting it poke in
- * as a partial, cut-off shape. Width extends east (~25% wider than the former
- * 75%-width map column) to include the Caspian basin and western Central Asia.
+ * Framed around the same center as the original 848×477 crop, with the visible
+ * area expanded by 25% on each axis so the rendered geography is 20% smaller.
+ * This keeps Norway and Portugal inside the frame while retaining the Caspian
+ * basin and western Central Asia.
  */
 export const NARA_VIEWBOX = {
-  width: 848,
-  height: 477,
-  minX: 155,
-  minY: 35,
+  width: 1060,
+  height: 596.25,
+  minX: 49,
+  minY: -24.625,
 } as const;
 
 export const NARA_REGION_COUNTRIES = new Set<string>([
@@ -91,6 +89,16 @@ export type CapitalMarker = {
   country: string;
   x: number;
   y: number;
+};
+
+/** Manual nudges for capitals whose projected coords overlap a neighbor. */
+const CAPITAL_MARKER_OFFSETS: Partial<
+  Record<string, { dx: number; dy: number }>
+> = {
+  SK: {
+    dx: NARA_VIEWBOX.width * 0.02,
+    dy: -NARA_VIEWBOX.height * 0.02,
+  },
 };
 
 const projection = geoMercator()
@@ -236,7 +244,9 @@ function buildCapitalMarkers(capitals: Capital[]): CapitalMarker[] {
       return [];
     }
 
-    const [x, y] = projected;
+    const offset = CAPITAL_MARKER_OFFSETS[capital.iso];
+    const x = roundProjection(projected[0] + (offset?.dx ?? 0));
+    const y = roundProjection(projected[1] + (offset?.dy ?? 0));
 
     if (!isWithinViewBox(x, y)) {
       return [];
