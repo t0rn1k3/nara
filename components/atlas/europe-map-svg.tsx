@@ -112,21 +112,20 @@ export function EuropeMapSvg({
           {capitals.map((capital) => (
             <g key={capital.iso} transform={`translate(${capital.x}, ${capital.y})`}>
               <circle
-                r={3.5}
+                r={2.5}
                 fill="var(--map-capital)"
                 stroke="#ffffff"
-                strokeWidth={1.25}
+                strokeWidth={1.15}
               />
               <text
                 x={5}
                 y={3}
                 fill="var(--map-capital-label)"
-                fontSize={8}
+                fontSize={6}
                 fontFamily="var(--font-sans)"
                 fontWeight={500}
-                style={{ paintOrder: "stroke", stroke: "#ffffff", strokeWidth: 2 }}
               >
-                {capital.name}
+                {capital.country}
               </text>
             </g>
           ))}

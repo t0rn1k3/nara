@@ -88,6 +88,7 @@ export type CountryPath = {
 export type CapitalMarker = {
   iso: string;
   name: string;
+  country: string;
   x: number;
   y: number;
 };
@@ -241,7 +242,7 @@ function buildCapitalMarkers(capitals: Capital[]): CapitalMarker[] {
       return [];
     }
 
-    return [{ iso: capital.iso, name: capital.name, x, y }];
+    return [{ iso: capital.iso, name: capital.name, country: capital.country, x, y }];
   });
 
   return markers;
