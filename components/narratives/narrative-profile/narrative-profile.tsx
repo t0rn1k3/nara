@@ -40,15 +40,7 @@ export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
           Back to Atlas
         </Link>
 
-        <p
-          className="mt-8 font-mono text-[10px] tracking-[0.18em] uppercase"
-          style={{
-            color: `color-mix(in srgb, ${narrative.accentColor} 75%, black)`,
-          }}
-        >
-          {narrative.category}
-        </p>
-        <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight text-black capitalize sm:text-5xl">
+        <h1 className="mt-8 font-serif text-4xl leading-tight tracking-tight text-black capitalize sm:text-5xl">
           {narrative.name}
         </h1>
         <dl className="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] text-black/55">
@@ -114,9 +106,6 @@ export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
                     >
                       <span className="font-serif text-lg text-black uppercase group-hover:underline">
                         {item.name}
-                      </span>
-                      <span className="shrink-0 font-mono text-[10px] text-black/55">
-                        {item.category}
                       </span>
                     </Link>
                   </li>

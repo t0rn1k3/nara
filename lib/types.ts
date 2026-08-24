@@ -7,7 +7,6 @@ export type Narrative = {
   id: string;
   slug: string;
   name: string;
-  category: string;
   overview: string;
   countries: string[];
   parties: NarrativeParty[];

@@ -9,7 +9,6 @@ export const narratives: Narrative[] = [
     id: "anti-eu",
     slug: "anti-eu",
     name: "Anti-EU narratives",
-    category: "Nationalism",
     overview:
       "",
     countries: ["RU", "DE", "HU", "GE"],
@@ -28,7 +27,6 @@ export const narratives: Narrative[] = [
     id: "anti-systemic",
     slug: "anti-systemic",
     name: "Anti-Systemic narratives",
-    category: "Nationalism",
     overview:
       "",
     countries: ["RU", "DE", "HU", "GE"],
@@ -47,7 +45,6 @@ export const narratives: Narrative[] = [
     id: "protest",
     slug: "protest",
     name: "Protest narratives",
-    category: "Nationalism",
     overview:
       "",
     countries: ["RU", "DE", "HU", "GE"],
@@ -66,7 +63,6 @@ export const narratives: Narrative[] = [
     id: "pro-russian",
     slug: "pro-russian",
     name: "Pro-Russian narratives",
-    category: "Nationalism",
     overview:
       "",
     countries: ["RU", "DE", "HU", "GE"],
@@ -85,7 +81,6 @@ export const narratives: Narrative[] = [
     id: "nationalist",
     slug: "nationalist",
     name: "Nationalist narratives",
-    category: "Nationalism",
     overview:
       "",
     countries: ["RU", "DE", "HU", "GE"],
@@ -104,7 +99,6 @@ export const narratives: Narrative[] = [
     id: "anti-immigration",
     slug: "anti-immigration",
     name: "Anti-Immigration and Anti-Islamic narratives",
-    category: "Nationalism",
     overview:
       "",
     countries: ["RU", "DE", "HU", "GE"],
@@ -122,8 +116,7 @@ export const narratives: Narrative[] = [
   {
     id: "traditional",
     slug: "traditional",
-    name: "Traditionalal narratives",
-    category: "Nationalism",
+    name: "Traditional narratives",
     overview:
       "",
     countries: ["RU", "DE", "HU", "GE"],
@@ -142,7 +135,6 @@ export const narratives: Narrative[] = [
     id: "victim",
     slug: "victim",
     name: "Victim narratives",
-    category: "Nationalism",
     overview:
       "",
     countries: ["RU", "DE", "HU", "GE"],
@@ -161,7 +153,6 @@ export const narratives: Narrative[] = [
     id: "about-ukraine",
     slug: "about-ukraine",
     name: "Narratives about war in Ukraine",
-    category: "Nationalism",
     overview:
       "",
     countries: ["RU", "DE", "HU", "GE"],
@@ -180,7 +171,6 @@ export const narratives: Narrative[] = [
     id: "weak-west",
     slug: "weak-west",
     name: "Narratives of a weak and decadent West",
-    category: "Nationalism",
     overview:
       "",
     countries: ["RU", "DE", "HU", "GE"],

@@ -10,6 +10,13 @@ type NarrativeItemProps = {
   narrative: Narrative;
 };
 
+const MAX_NAME_LENGTH = 35;
+
+function truncateName(name: string): string {
+  if (name.length <= MAX_NAME_LENGTH) return name;
+  return `${name.slice(0, MAX_NAME_LENGTH)}...`;
+}
+
 export function NarrativeItem({ narrative }: NarrativeItemProps) {
   const { hoveredId, setHoveredId, clearHover, setSelectedId } =
     useNarrativeSelection();
@@ -33,11 +40,11 @@ export function NarrativeItem({ narrative }: NarrativeItemProps) {
           ["--item-accent" as string]: narrative.accentColor,
         }}
       >
-        <span className="font-serif text-lg leading-snug text-black uppercase">
-          {narrative.name}
-        </span>
-        <span className="mt-1.5 block font-mono text-[10px] tracking-wide">
-          {narrative.category}
+        <span
+          className="font-serif text-[0.9rem] leading-snug text-black capitalize"
+          title={narrative.name.length > MAX_NAME_LENGTH ? narrative.name : undefined}
+        >
+          {truncateName(narrative.name)}
         </span>
       </Link>
     </li>
