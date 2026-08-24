@@ -9,6 +9,11 @@ export type NarrativeCountry = {
   strength: number;
 };
 
+export type NarrativeParty = {
+  name: string;
+  iso: string;
+};
+
 export type Narrative = {
   id: string;
   slug: string;
@@ -16,6 +21,7 @@ export type Narrative = {
   category: string;
   overview: string;
   countries: NarrativeCountry[];
+  parties: NarrativeParty[];
   accentColor: string;
   timeline: NarrativeTimelineEntry[];
   actors: string[];

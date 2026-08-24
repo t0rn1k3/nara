@@ -1,7 +1,11 @@
-import type { Narrative, NarrativeCountry } from "./types";
+import type { Narrative, NarrativeCountry, NarrativeParty } from "./types";
 
 function nc(iso: string, strength: number): NarrativeCountry {
   return { iso, strength };
+}
+
+function pp(name: string, iso: string): NarrativeParty {
+  return { name, iso };
 }
 
 export const narratives: Narrative[] = [
@@ -20,6 +24,15 @@ export const narratives: Narrative[] = [
       nc("KZ", 0.85),
       nc("AZ", 0.60),
       nc("TR", 0.50),
+    ],
+    parties: [
+      pp("United Russia", "RU"),
+      pp("Belaya Rus", "BY"),
+      pp("Fidesz", "HU"),
+      pp("Georgian Dream", "GE"),
+      pp("Amanat", "KZ"),
+      pp("New Azerbaijan Party", "AZ"),
+      pp("Justice and Development Party (AKP)", "TR"),
     ],
     accentColor: "#9B6B6B",
     timeline: [
@@ -62,6 +75,15 @@ export const narratives: Narrative[] = [
       nc("FR", 0.45),
       nc("GB", 0.8),
     ],
+    parties: [
+      pp("Law and Justice (PiS)", "PL"),
+      pp("Fidesz", "HU"),
+      pp("Smer – Social Democracy", "SK"),
+      pp("Freedom and Direct Democracy (SPD)", "CZ"),
+      pp("Brothers of Italy", "IT"),
+      pp("National Rally", "FR"),
+      pp("Reform UK", "GB"),
+    ],
     accentColor: "#C4A265",
     timeline: [
       { year: 2016, label: "Brexit referendum frames sovereignty as core issue" },
@@ -101,6 +123,14 @@ export const narratives: Narrative[] = [
       nc("PL", 0.75),
       nc("SK", 0.55),
       nc("RS", 0.5),
+    ],
+    parties: [
+      pp("United Russia", "RU"),
+      pp("Belaya Rus", "BY"),
+      pp("Fidesz", "HU"),
+      pp("Law and Justice (PiS)", "PL"),
+      pp("Smer – Social Democracy", "SK"),
+      pp("Serbian Progressive Party", "RS"),
     ],
     accentColor: "#9B6B6B",
     timeline: [
@@ -143,6 +173,16 @@ export const narratives: Narrative[] = [
       nc("SK", 0.5),
       nc("GE", 0.45),
       nc("TR", 0.5),
+    ],
+    parties: [
+      pp("United Russia", "RU"),
+      pp("Fidesz", "HU"),
+      pp("Law and Justice (PiS)", "PL"),
+      pp("Alliance for the Union of Romanians (AUR)", "RO"),
+      pp("Serbian Progressive Party", "RS"),
+      pp("Slovak National Party", "SK"),
+      pp("Georgian Dream", "GE"),
+      pp("Justice and Development Party (AKP)", "TR"),
     ],
     accentColor: "#C4A265",
     timeline: [
@@ -187,6 +227,17 @@ export const narratives: Narrative[] = [
       nc("SE", 0.45),
       nc("NL", 0.4),
     ],
+    parties: [
+      pp("National Rally", "FR"),
+      pp("Alternative for Germany (AfD)", "DE"),
+      pp("League", "IT"),
+      pp("Fidesz", "HU"),
+      pp("Confederation", "PL"),
+      pp("Freedom Party of Austria (FPÖ)", "AT"),
+      pp("Vlaams Belang", "BE"),
+      pp("Sweden Democrats", "SE"),
+      pp("Party for Freedom (PVV)", "NL"),
+    ],
     accentColor: "#9B6B6B",
     timeline: [
       { year: 2011, label: "Renaud Camus publishes replacement thesis" },
@@ -228,6 +279,15 @@ export const narratives: Narrative[] = [
       nc("HU", 0.75),
       nc("RS", 0.6),
     ],
+    parties: [
+      pp("United Russia", "RU"),
+      pp("Belaya Rus", "BY"),
+      pp("Sahra Wagenknecht Alliance (BSW)", "DE"),
+      pp("National Rally", "FR"),
+      pp("Five Star Movement", "IT"),
+      pp("Fidesz", "HU"),
+      pp("Serbian Progressive Party", "RS"),
+    ],
     accentColor: "#7BA3BC",
     timeline: [
       { year: 2022, label: "Full-scale invasion launched; 'special operation' framing" },
@@ -268,6 +328,16 @@ export const narratives: Narrative[] = [
       nc("CN", 0.55),
       nc("TR", 0.45),
       nc("DE", 0.4),
+    ],
+    parties: [
+      pp("United Russia", "RU"),
+      pp("Communist Party of the Russian Federation", "RU"),
+      pp("Belaya Rus", "BY"),
+      pp("Serbian Progressive Party", "RS"),
+      pp("Fidesz", "HU"),
+      pp("Communist Party of China", "CN"),
+      pp("Homeland Party (Vatan)", "TR"),
+      pp("Alternative for Germany (AfD)", "DE"),
     ],
     accentColor: "#7BA3BC",
     timeline: [
@@ -311,6 +381,15 @@ export const narratives: Narrative[] = [
       nc("TR", 0.5),
       nc("SA", 0.45),
     ],
+    parties: [
+      pp("United Russia", "RU"),
+      pp("Belaya Rus", "BY"),
+      pp("Communist Party of China", "CN"),
+      pp("Front of Islamic Revolution Stability", "IR"),
+      pp("Serbian Progressive Party", "RS"),
+      pp("Fidesz", "HU"),
+      pp("Justice and Development Party (AKP)", "TR"),
+    ],
     accentColor: "#9B6B6B",
     timeline: [
       { year: 2008, label: "Russia-Georgia war reframed as Western proxy conflict" },
@@ -353,6 +432,16 @@ export const narratives: Narrative[] = [
       nc("TR", 0.6),
       nc("RS", 0.45),
     ],
+    parties: [
+      pp("Law and Justice (PiS)", "PL"),
+      pp("Fidesz", "HU"),
+      pp("National Rally", "FR"),
+      pp("Brothers of Italy", "IT"),
+      pp("Vox", "ES"),
+      pp("Greek Solution", "GR"),
+      pp("Nationalist Movement Party (MHP)", "TR"),
+      pp("Serbian Radical Party", "RS"),
+    ],
     accentColor: "#C4A265",
     timeline: [
       { year: 2010, label: "Orbán declares 'illiberal democracy' rooted in nation" },
@@ -393,6 +482,15 @@ export const narratives: Narrative[] = [
       nc("FR", 0.45),
       nc("US", 0.65),
       nc("DE", 0.4),
+    ],
+    parties: [
+      pp("United Russia", "RU"),
+      pp("Fidesz", "HU"),
+      pp("Confederation", "PL"),
+      pp("League", "IT"),
+      pp("Reconquête", "FR"),
+      pp("Republican Party", "US"),
+      pp("Alternative for Germany (AfD)", "DE"),
     ],
     accentColor: "#C4A265",
     timeline: [

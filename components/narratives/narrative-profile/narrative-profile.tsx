@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { NarrativeProfileMap } from "@/components/atlas/narrative-profile-map";
-import { formatCountryStrength, getCountryName } from "@/lib/countries";
+import { getCountryName } from "@/lib/countries";
 import { getRelatedNarratives } from "@/lib/narratives";
 import type { Narrative } from "@/lib/types";
 
@@ -28,9 +28,6 @@ function ProfileSection({
 
 export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
   const related = getRelatedNarratives(narrative.id);
-  const sortedCountries = [...narrative.countries].sort(
-    (a, b) => b.strength - a.strength,
-  );
 
   return (
     <article className="mx-auto max-w-6xl px-6 py-10 sm:px-8 lg:py-14">
@@ -59,6 +56,10 @@ export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
             <dt className="sr-only">Countries</dt>
             <dd>{narrative.countries.length} countries</dd>
           </div>
+          <div>
+            <dt className="sr-only">Political parties</dt>
+            <dd>{narrative.parties.length} political parties</dd>
+          </div>
         </dl>
       </header>
 
@@ -70,59 +71,19 @@ export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
             </p>
           </ProfileSection>
 
-          <ProfileSection title="Countries">
+          <ProfileSection title="Political Parties">
             <ul className="grid gap-2 sm:grid-cols-2">
-              {sortedCountries.map(({ iso, strength }) => (
+              {narrative.parties.map((party) => (
                 <li
-                  key={iso}
+                  key={`${party.iso}-${party.name}`}
                   className="flex items-baseline justify-between gap-4 border border-black/15 px-4 py-3"
                 >
                   <span className="font-sans text-sm text-black">
-                    {getCountryName(iso)}
+                    {party.name}
                   </span>
                   <span className="shrink-0 font-mono text-[10px] text-black/55">
-                    {formatCountryStrength(strength)}
+                    {getCountryName(party.iso)}
                   </span>
-                </li>
-              ))}
-            </ul>
-          </ProfileSection>
-
-          <ProfileSection title="Timeline">
-            <ol className="relative space-y-0 border-l border-black/20 pl-6">
-              {narrative.timeline.map((entry) => (
-                <li key={`${entry.year}-${entry.label}`} className="relative pb-6 last:pb-0">
-                  <span
-                    className="absolute top-1 -left-[calc(0.375rem+1px)] h-2 w-2 rounded-full"
-                    style={{ backgroundColor: narrative.accentColor }}
-                    aria-hidden
-                  />
-                  <time
-                    dateTime={String(entry.year)}
-                    className="font-mono text-[11px] text-black/55"
-                  >
-                    {entry.year}
-                  </time>
-                  <p className="mt-1 font-sans text-sm leading-relaxed text-black/80">
-                    {entry.label}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </ProfileSection>
-
-          <ProfileSection title="Main Actors">
-            <ul className="space-y-2">
-              {narrative.actors.map((actor) => (
-                <li
-                  key={actor}
-                  className="flex gap-3 font-sans text-sm leading-relaxed text-black/80"
-                >
-                  <span
-                    className="mt-2 h-1 w-1 shrink-0 rounded-full bg-black/40"
-                    aria-hidden
-                  />
-                  {actor}
                 </li>
               ))}
             </ul>
