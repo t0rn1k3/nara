@@ -1,4 +1,5 @@
 const MAP_HIGHLIGHT = "#F4CE00";
+const MAP_HIGHLIGHT_ALPHA = 0.8;
 
 function parseHex(hex: string): [number, number, number] {
   const value = hex.replace("#", "");
@@ -9,13 +10,9 @@ function parseHex(hex: string): [number, number, number] {
   ];
 }
 
-/** Fade from transparent to the highlight by narrative strength (0–1). */
-export function narrativeCountryFill(strength: number): string {
-  const t = Math.min(1, Math.max(0, strength));
+/** Uniform fill for every country where a narrative is present. */
+export const NARRATIVE_COUNTRY_FILL = (() => {
   const [r, g, b] = parseHex(MAP_HIGHLIGHT);
 
-  return `rgba(${r}, ${g}, ${b}, ${t})`;
-}
-
-/** Full highlight + glow only for the strongest adopters. */
-export const NARRATIVE_GLOW_THRESHOLD = 0.75;
+  return `rgba(${r}, ${g}, ${b}, ${MAP_HIGHLIGHT_ALPHA})`;
+})();

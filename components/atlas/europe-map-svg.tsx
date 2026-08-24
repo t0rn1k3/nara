@@ -3,13 +3,13 @@ import {
   getCountryPaths,
   NARA_VIEWBOX,
 } from "@/lib/geo";
-import { narrativeCountryFill, NARRATIVE_GLOW_THRESHOLD } from "@/lib/map-colors";
+import { NARRATIVE_COUNTRY_FILL } from "@/lib/map-colors";
 
 const MAP_PATH_TRANSITION =
   "fill 400ms ease, opacity 400ms ease, filter 400ms ease";
 
 type EuropeMapSvgProps = {
-  strengthByIso: Map<string, number>;
+  highlightedIsos: Set<string>;
   dimInactive?: boolean;
   showCapitals?: boolean;
   className?: string;
@@ -17,7 +17,7 @@ type EuropeMapSvgProps = {
 };
 
 export function EuropeMapSvg({
-  strengthByIso,
+  highlightedIsos,
   dimInactive = false,
   showCapitals = true,
   className = "h-full w-full",
@@ -25,7 +25,7 @@ export function EuropeMapSvg({
 }: EuropeMapSvgProps) {
   const paths = getCountryPaths();
   const capitals = getCapitalMarkers();
-  const hasHighlight = strengthByIso.size > 0;
+  const hasHighlight = highlightedIsos.size > 0;
 
   return (
     <svg
@@ -72,8 +72,7 @@ export function EuropeMapSvg({
 
       <g id="country-regions" filter="url(#map-soft-shadow)">
         {paths.map((path) => {
-          const strength = path.iso ? strengthByIso.get(path.iso) : undefined;
-          const isActive = strength !== undefined;
+          const isActive = path.iso ? highlightedIsos.has(path.iso) : false;
           const isDimmed =
             dimInactive && hasHighlight && Boolean(path.iso) && !isActive;
 
@@ -81,10 +80,7 @@ export function EuropeMapSvg({
             ? "var(--map-land)"
             : "var(--map-land-muted)";
 
-          const fill = isActive
-            ? narrativeCountryFill(strength)
-            : defaultFill;
-          const showGlow = isActive && strength >= NARRATIVE_GLOW_THRESHOLD;
+          const fill = isActive ? NARRATIVE_COUNTRY_FILL : defaultFill;
 
           return (
             <path
@@ -92,7 +88,7 @@ export function EuropeMapSvg({
               d={path.d}
               data-iso={path.iso ?? undefined}
               data-region={path.isEuropean ? "nara" : "other"}
-              data-strength={isActive ? strength : undefined}
+              data-active={isActive ? "true" : undefined}
               className="map-country-path"
               fill={fill}
               fillOpacity={1}
@@ -100,7 +96,7 @@ export function EuropeMapSvg({
               strokeWidth={0.5}
               strokeLinejoin="round"
               opacity={isDimmed ? 0.4 : 1}
-              filter={showGlow ? "url(#map-country-glow)" : undefined}
+              filter={isActive ? "url(#map-country-glow)" : undefined}
               style={{ transition: MAP_PATH_TRANSITION }}
             />
           );

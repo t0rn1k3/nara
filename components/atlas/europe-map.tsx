@@ -16,14 +16,12 @@ export function EuropeMap() {
     [hoveredId],
   );
 
-  const strengthByIso = useMemo(() => {
-    if (!hoveredNarrative) return new Map<string, number>();
-    return new Map(
-      hoveredNarrative.countries.map(({ iso, strength }) => [iso, strength]),
-    );
+  const highlightedIsos = useMemo(() => {
+    if (!hoveredNarrative) return new Set<string>();
+    return new Set(hoveredNarrative.countries.map(({ iso }) => iso));
   }, [hoveredNarrative]);
 
   return (
-    <EuropeMapSvg strengthByIso={strengthByIso} />
+    <EuropeMapSvg highlightedIsos={highlightedIsos} />
   );
 }
