@@ -1,5 +1,5 @@
 const MAP_HIGHLIGHT = "#F4CE00";
-const MAP_HIGHLIGHT_ALPHA = 0.8;
+const MAP_HIGHLIGHT_ALPHA = 1;
 
 function parseHex(hex: string): [number, number, number] {
   const value = hex.replace("#", "");

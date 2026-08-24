@@ -21,6 +21,7 @@ export function NarrativeItem({ narrative }: NarrativeItemProps) {
   const { hoveredId, setHoveredId, clearHover, setSelectedId } =
     useNarrativeSelection();
   const isActive = hoveredId === narrative.id;
+  const isTruncated = narrative.name.length > MAX_NAME_LENGTH;
 
   return (
     <li>
@@ -32,6 +33,7 @@ export function NarrativeItem({ narrative }: NarrativeItemProps) {
         onBlur={clearHover}
         onClick={() => setSelectedId(narrative.id)}
         aria-current={isActive ? "true" : undefined}
+        aria-label={isTruncated ? narrative.name : undefined}
         className={`narrative-item relative block border-l-2 px-6 py-6 transition-[background-color,border-color] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-black/30 ${
           isActive ? "" : "border-transparent"
         }`}
@@ -40,11 +42,13 @@ export function NarrativeItem({ narrative }: NarrativeItemProps) {
           ["--item-accent" as string]: narrative.accentColor,
         }}
       >
-        <span
-          className="font-serif text-[0.9rem] leading-snug text-black capitalize"
-          title={narrative.name.length > MAX_NAME_LENGTH ? narrative.name : undefined}
-        >
+        <span className="narrative-item-name font-serif text-[0.9rem] leading-snug text-black capitalize">
           {truncateName(narrative.name)}
+          {isTruncated ? (
+            <span role="tooltip" className="narrative-item-tooltip">
+              {narrative.name}
+            </span>
+          ) : null}
         </span>
       </Link>
     </li>

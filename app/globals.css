@@ -74,6 +74,40 @@ body {
   border-left-color: var(--item-accent);
 }
 
+.narrative-item-name {
+  position: relative;
+}
+
+.narrative-item-tooltip {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  z-index: 10;
+  visibility: hidden;
+  width: max-content;
+  max-width: min(18rem, calc(100vw - 3rem));
+  border: 1px solid rgb(0 0 0 / 0.15);
+  border-radius: 0.375rem;
+  background-color: var(--nara-aside-hover);
+  padding: 0.375rem 0.625rem;
+  box-shadow: 0 8px 32px rgb(11 20 38 / 0.12);
+  color: rgb(0 0 0 / 0.8);
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  line-height: 1.375;
+  text-transform: capitalize;
+  white-space: normal;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms, visibility 300ms;
+}
+
+.narrative-item:hover .narrative-item-tooltip,
+.narrative-item:focus-visible .narrative-item-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
 .aside-scroll {
   scrollbar-width: thin;
   scrollbar-color: var(--nara-aside-scroll-thumb) var(--nara-aside-scroll-track);
@@ -99,7 +133,8 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .map-country-path,
-  .narrative-item {
+  .narrative-item,
+  .narrative-item-tooltip {
     transition: none;
   }
 }
