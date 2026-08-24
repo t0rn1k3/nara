@@ -1,8 +1,3 @@
-export type NarrativeTimelineEntry = {
-  year: number;
-  label: string;
-};
-
 /** 0–1 scale: 1 = central originator, lower = peripheral adoption */
 export type NarrativeCountry = {
   iso: string;
@@ -23,11 +18,7 @@ export type Narrative = {
   countries: NarrativeCountry[];
   parties: NarrativeParty[];
   accentColor: string;
-  timeline: NarrativeTimelineEntry[];
-  actors: string[];
   keywords: string[];
   relatedIds: string[];
-  yearFrom: number;
-  yearTo: number;
   sourceCount: number;
 };

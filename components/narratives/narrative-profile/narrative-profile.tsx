@@ -89,17 +89,19 @@ export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
             </ul>
           </ProfileSection>
 
-          <ProfileSection title="Keywords">
-            <ul className="flex flex-wrap gap-2">
-              {narrative.keywords.map((keyword) => (
-                <li key={keyword}>
-                  <span className="inline-block border border-black/20 px-3 py-1.5 font-mono text-[10px] tracking-wide text-black/70">
-                    {keyword}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </ProfileSection>
+          <div className="hidden">
+            <ProfileSection title="Keywords">
+              <ul className="flex flex-wrap gap-2">
+                {narrative.keywords.map((keyword) => (
+                  <li key={keyword}>
+                    <span className="inline-block border border-black/20 px-3 py-1.5 font-mono text-[10px] tracking-wide text-black/70">
+                      {keyword}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </ProfileSection>
+          </div>
 
           {related.length > 0 ? (
             <ProfileSection title="Related Narratives">
