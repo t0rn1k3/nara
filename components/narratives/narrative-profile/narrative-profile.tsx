@@ -51,20 +51,10 @@ export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
         >
           {narrative.category}
         </p>
-        <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight text-black sm:text-5xl">
+        <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight text-black uppercase sm:text-5xl">
           {narrative.name}
         </h1>
         <dl className="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] text-black/55">
-          <div>
-            <dt className="sr-only">Date range</dt>
-            <dd>
-              {narrative.yearFrom}–{narrative.yearTo}
-            </dd>
-          </div>
-          <div>
-            <dt className="sr-only">Sources tracked</dt>
-            <dd>{narrative.sourceCount} sources tracked</dd>
-          </div>
           <div>
             <dt className="sr-only">Countries</dt>
             <dd>{narrative.countries.length} countries</dd>
@@ -159,7 +149,7 @@ export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
                       href={`/narratives/${item.slug}`}
                       className="group flex items-baseline justify-between gap-4 px-4 py-4 transition-colors hover:bg-[var(--nara-aside-bg)]/25"
                     >
-                      <span className="font-serif text-lg text-black group-hover:underline">
+                      <span className="font-serif text-lg text-black uppercase group-hover:underline">
                         {item.name}
                       </span>
                       <span className="shrink-0 font-mono text-[10px] text-black/55">
@@ -171,18 +161,6 @@ export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
               </ul>
             </ProfileSection>
           ) : null}
-
-          <ProfileSection title="Sources">
-            <p className="font-sans text-sm leading-relaxed text-black/70">
-              NA-RA tracks{" "}
-              <span className="font-mono text-black">
-                {narrative.sourceCount}
-              </span>{" "}
-              primary sources for this narrative across state media, parliamentary
-              records, and independent monitoring. Full bibliography access is
-              planned for a future release.
-            </p>
-          </ProfileSection>
         </div>
 
         <aside className="lg:sticky lg:top-10 lg:self-start">

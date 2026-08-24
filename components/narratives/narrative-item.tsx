@@ -33,11 +33,11 @@ export function NarrativeItem({ narrative }: NarrativeItemProps) {
           ["--item-accent" as string]: narrative.accentColor,
         }}
       >
-        <span className="font-serif text-lg leading-snug text-black">
+        <span className="font-serif text-lg leading-snug text-black uppercase">
           {narrative.name}
         </span>
         <span className="mt-1.5 block font-mono text-[10px] tracking-wide">
-          {narrative.category} · {narrative.yearFrom}–{narrative.yearTo}
+          {narrative.category}
         </span>
       </Link>
     </li>
