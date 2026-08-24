@@ -48,7 +48,7 @@ export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
         >
           {narrative.category}
         </p>
-        <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight text-black uppercase sm:text-5xl">
+        <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight text-black capitalize sm:text-5xl">
           {narrative.name}
         </h1>
         <dl className="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] text-black/55">
