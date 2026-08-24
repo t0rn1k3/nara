@@ -32,7 +32,7 @@ export function NarrativeItem({ narrative }: NarrativeItemProps) {
         onBlur={clearHover}
         onClick={() => setSelectedId(narrative.id)}
         aria-current={isActive ? "true" : undefined}
-        className={`narrative-item block border-l-2 px-6 py-6 transition-[background-color,border-color] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-black/30 ${
+        className={`narrative-item relative block border-l-2 px-6 py-6 transition-[background-color,border-color] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-black/30 ${
           isActive ? "" : "border-transparent"
         }`}
         style={{
