@@ -2,12 +2,10 @@
 
 import { useMemo } from "react";
 
-import type { NarrativeCountry } from "@/lib/types";
-
 import { EuropeMapSvg } from "./europe-map-svg";
 
 type NarrativeProfileMapProps = {
-  countries: NarrativeCountry[];
+  countries: string[];
   narrativeName: string;
 };
 
@@ -15,10 +13,7 @@ export function NarrativeProfileMap({
   countries,
   narrativeName,
 }: NarrativeProfileMapProps) {
-  const highlightedIsos = useMemo(
-    () => new Set(countries.map(({ iso }) => iso)),
-    [countries],
-  );
+  const highlightedIsos = useMemo(() => new Set(countries), [countries]);
 
   return (
     <div className="relative aspect-[848/477] w-full overflow-hidden rounded-lg border border-black/15 bg-[var(--map-ocean-deep)]">

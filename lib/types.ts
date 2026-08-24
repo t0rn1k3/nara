@@ -1,9 +1,3 @@
-/** 0–1 scale: 1 = central originator, lower = peripheral adoption */
-export type NarrativeCountry = {
-  iso: string;
-  strength: number;
-};
-
 export type NarrativeParty = {
   name: string;
   iso: string;
@@ -15,7 +9,7 @@ export type Narrative = {
   name: string;
   category: string;
   overview: string;
-  countries: NarrativeCountry[];
+  countries: string[];
   parties: NarrativeParty[];
   accentColor: string;
   keywords: string[];

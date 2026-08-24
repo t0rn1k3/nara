@@ -18,7 +18,7 @@ export function EuropeMap() {
 
   const highlightedIsos = useMemo(() => {
     if (!hoveredNarrative) return new Set<string>();
-    return new Set(hoveredNarrative.countries.map(({ iso }) => iso));
+    return new Set(hoveredNarrative.countries);
   }, [hoveredNarrative]);
 
   return (

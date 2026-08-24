@@ -1,8 +1,4 @@
-import type { Narrative, NarrativeCountry, NarrativeParty } from "./types";
-
-function nc(iso: string, strength: number): NarrativeCountry {
-  return { iso, strength };
-}
+import type { Narrative, NarrativeParty } from "./types";
 
 function pp(name: string, iso: string): NarrativeParty {
   return { name, iso };
@@ -16,15 +12,7 @@ export const narratives: Narrative[] = [
     category: "State Control",
     overview:
       "A legal and rhetorical frame used to discredit independent media, NGOs, and civil society by labelling them as instruments of foreign influence. Originating in post-Soviet legislation, the narrative has diffused across Central Europe and the Caucasus as governments tighten information controls.",
-    countries: [
-      nc("RU", 1),
-      nc("BY", 0.9),
-      nc("HU", 0.65),
-      nc("GE", 0.65),
-      nc("KZ", 0.85),
-      nc("AZ", 0.60),
-      nc("TR", 0.50),
-    ],
+    countries: ["RU", "BY", "HU", "GE", "KZ", "AZ", "TR"],
     parties: [
       pp("United Russia", "RU"),
       pp("Belaya Rus", "BY"),
