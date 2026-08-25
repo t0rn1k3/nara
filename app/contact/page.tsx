@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { CONTACT_EMAIL } from "@/lib/contact";
 
 export const metadata: Metadata = {
-  title: "Contact — NA-RA",
+  title: "Contact — NARA",
   description: "Get in touch with NARA for research, collaboration, or media enquiries.",
 };
 

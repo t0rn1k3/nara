@@ -1,31 +1,15 @@
-import Link from "next/link";
+import { BrandLink } from "@/components/brand-link";
+import { SiteNav } from "@/components/site-nav";
 
 export function AsideMasthead() {
   return (
     <header className="shrink-0 border-b border-nara-grey-300/20 px-6 pt-6 pb-5">
       <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="mt-3 font-serif text-[2.75rem] leading-none font-normal tracking-tight text-black">
-            NA-RA
-          </h1>
-          <p className="mt-2 font-sans text-[13px] font-medium tracking-[0.18em] uppercase">
-            The European Narrative Atlas
-          </p>
+        <div className="mt-3">
+          <h1 className="sr-only">NARA — The European Narrative Atlas</h1>
+          <BrandLink tagline="The European Narrative Atlas" size="large" />
         </div>
-        <nav className="mt-3 flex shrink-0 flex-col items-end gap-1">
-          <Link
-            href="/about"
-            className="font-mono text-[10px] tracking-[0.16em] text-black/55 uppercase transition-colors hover:text-black"
-          >
-            About
-          </Link>
-          <Link
-            href="/contact"
-            className="font-mono text-[10px] tracking-[0.16em] text-black/55 uppercase transition-colors hover:text-black"
-          >
-            Contact
-          </Link>
-        </nav>
+        <SiteNav orientation="vertical" />
       </div>
     </header>
   );

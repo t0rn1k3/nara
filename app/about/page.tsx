@@ -4,7 +4,7 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
-  title: "About — NA-RA",
+  title: "About — NARA",
   description:
     "NARA is an independent research initiative focused on political narratives across Europe and its wider neighbourhood.",
 };
@@ -31,8 +31,12 @@ export default function AboutPage() {
 
         <header className="mt-8 border-b border-black/15 pb-8">
           <h1 className="font-serif text-4xl leading-tight tracking-tight text-black sm:text-5xl">
-            NARA — The European Narrative Atlas
+            About NARA
           </h1>
+          <p className="mt-4 font-sans text-base leading-relaxed text-black/70">
+            NARA is the overarching research initiative. The European Narrative
+            Atlas is its main interactive product.
+          </p>
         </header>
 
         <div className="mt-8 space-y-6">
