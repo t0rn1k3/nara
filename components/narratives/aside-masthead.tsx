@@ -12,12 +12,20 @@ export function AsideMasthead() {
             The European Narrative Atlas
           </p>
         </div>
-        <Link
-          href="/about"
-          className="mt-3 shrink-0 font-mono text-[10px] tracking-[0.16em] text-black/55 uppercase transition-colors hover:text-black"
-        >
-          About
-        </Link>
+        <nav className="mt-3 flex shrink-0 flex-col items-end gap-1">
+          <Link
+            href="/about"
+            className="font-mono text-[10px] tracking-[0.16em] text-black/55 uppercase transition-colors hover:text-black"
+          >
+            About
+          </Link>
+          <Link
+            href="/contact"
+            className="font-mono text-[10px] tracking-[0.16em] text-black/55 uppercase transition-colors hover:text-black"
+          >
+            Contact
+          </Link>
+        </nav>
       </div>
     </header>
   );
