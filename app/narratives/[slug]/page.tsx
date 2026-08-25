@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { NarrativeProfile } from "@/components/narratives/narrative-profile/narrative-profile";
+import { SiteHeader } from "@/components/site-header";
 import { getNarrativeBySlug, narratives } from "@/lib/narratives";
 
 type PageProps = {
@@ -37,16 +37,7 @@ export default async function NarrativePage({ params }: PageProps) {
 
   return (
     <div className="min-h-dvh bg-[var(--map-ocean-deep)] text-black/80">
-      <div className="border-b border-nara-grey-300/20 bg-[var(--nara-aside-bg)]">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 sm:px-8">
-          <Link href="/" className="group">
-            <span className="font-serif text-2xl text-black">NA-RA</span>
-            <span className="mt-0.5 block font-sans text-[10px] font-medium tracking-[0.16em] text-black/70 uppercase group-hover:text-black">
-              The European Narrative Atlas
-            </span>
-          </Link>
-        </div>
-      </div>
+      <SiteHeader />
       <NarrativeProfile narrative={narrative} />
     </div>
   );
