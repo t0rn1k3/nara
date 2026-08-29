@@ -2,18 +2,16 @@
 
 import { useMemo } from "react";
 
-import { narratives } from "@/lib/narratives";
-
 import { useNarrativeSelection } from "@/components/narratives/narrative-selection-context";
 
 import { EuropeMapSvg } from "./europe-map-svg";
 
 export function EuropeMap() {
-  const { hoveredId } = useNarrativeSelection();
+  const { hoveredId, narratives } = useNarrativeSelection();
 
   const hoveredNarrative = useMemo(
     () => narratives.find((narrative) => narrative.id === hoveredId) ?? null,
-    [hoveredId],
+    [hoveredId, narratives],
   );
 
   const highlightedIsos = useMemo(() => {

@@ -1,5 +1,8 @@
 import { HomeClient } from "@/components/home-client";
+import { getNarratives } from "@/sanity/narratives";
 
-export default function Home() {
-  return <HomeClient />;
+export default async function Home() {
+  const narratives = await getNarratives();
+
+  return <HomeClient narratives={narratives} />;
 }

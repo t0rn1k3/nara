@@ -1,8 +1,9 @@
-import { narratives } from "@/lib/narratives";
-
 import { NarrativeItem } from "./narrative-item";
+import { useNarrativeSelection } from "./narrative-selection-context";
 
 export function NarrativeList() {
+  const { narratives } = useNarrativeSelection();
+
   return (
     <section
       id="narrative-list"

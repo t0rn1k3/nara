@@ -9,7 +9,10 @@ import {
   type ReactNode,
 } from "react";
 
+import type { Narrative } from "@/lib/types";
+
 type NarrativeSelectionContextValue = {
+  narratives: Narrative[];
   hoveredId: string | null;
   selectedId: string | null;
   setHoveredId: (id: string | null) => void;
@@ -22,10 +25,12 @@ const NarrativeSelectionContext =
 
 type NarrativeSelectionProviderProps = {
   children: ReactNode;
+  narratives: Narrative[];
 };
 
 export function NarrativeSelectionProvider({
   children,
+  narratives,
 }: NarrativeSelectionProviderProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -36,13 +41,14 @@ export function NarrativeSelectionProvider({
 
   const value = useMemo(
     () => ({
+      narratives,
       hoveredId,
       selectedId,
       setHoveredId,
       setSelectedId,
       clearHover,
     }),
-    [hoveredId, selectedId, clearHover],
+    [narratives, hoveredId, selectedId, clearHover],
   );
 
   return (

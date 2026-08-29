@@ -2,11 +2,11 @@ import Link from "next/link";
 
 import { NarrativeProfileMap } from "@/components/atlas/narrative-profile-map";
 import { getCountryName } from "@/lib/countries";
-import { getRelatedNarratives } from "@/lib/narratives";
 import type { Narrative } from "@/lib/types";
 
 type NarrativeProfileProps = {
   narrative: Narrative;
+  related: Narrative[];
 };
 
 function ProfileSection({
@@ -26,9 +26,10 @@ function ProfileSection({
   );
 }
 
-export function NarrativeProfile({ narrative }: NarrativeProfileProps) {
-  const related = getRelatedNarratives(narrative.id);
-
+export function NarrativeProfile({
+  narrative,
+  related,
+}: NarrativeProfileProps) {
   return (
     <article className="mx-auto max-w-6xl px-6 py-10 sm:px-8 lg:py-14">
       <header className="max-w-3xl">
