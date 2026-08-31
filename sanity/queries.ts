@@ -1,5 +1,22 @@
 import {defineQuery} from 'next-sanity'
 
+export const ABOUT_PAGE_QUERY = defineQuery(`
+  *[_id == "aboutPage"][0] {
+    heading,
+    introduction,
+    "body": coalesce(body[]{_key, text}, [])
+  }
+`)
+
+export const CONTACT_PAGE_QUERY = defineQuery(`
+  *[_id == "contactPage"][0] {
+    heading,
+    introduction,
+    email,
+    "enquiryLinks": coalesce(enquiryLinks[]{_key, label, subject}, [])
+  }
+`)
+
 export const NARRATIVES_QUERY = defineQuery(`
   *[_type == "narrative" && defined(slug.current)]
   | order(name asc) {

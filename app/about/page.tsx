@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SiteHeader } from "@/components/site-header";
+import { getAboutPage } from "@/sanity/pages";
 
 export const metadata: Metadata = {
   title: "About — NARA",
@@ -9,14 +10,9 @@ export const metadata: Metadata = {
     "NARA is an independent research initiative focused on political narratives across Europe and its wider neighbourhood.",
 };
 
-const paragraphs = [
-  "NARA is an independent research initiative focused on political narratives, their development across different political and geographic contexts, and their role in the contemporary information environment.",
-  "The European Narrative Atlas is an interactive research platform designed to explore how political narratives appear across countries, political actors and contexts.",
-  "The project is based on qualitative research and comparative analysis of political communication and develops a structured approach to identifying and examining recurring narrative patterns across Europe and its wider neighbourhood.",
-  "The Atlas is intended as a research and public-facing tool, making complex patterns in political communication easier to explore and understand.",
-];
+export default async function AboutPage() {
+  const page = await getAboutPage();
 
-export default function AboutPage() {
   return (
     <div className="min-h-dvh bg-[var(--map-ocean-deep)] text-black/80">
       <SiteHeader />
@@ -31,21 +27,20 @@ export default function AboutPage() {
 
         <header className="mt-8 border-b border-black/15 pb-8">
           <h1 className="font-serif text-4xl leading-tight tracking-tight text-black sm:text-5xl">
-            About NARA
+            {page.heading}
           </h1>
           <p className="mt-4 font-sans text-base leading-relaxed text-black/70">
-            NARA is the overarching research initiative. The European Narrative
-            Atlas is its main interactive product.
+            {page.introduction}
           </p>
         </header>
 
         <div className="mt-8 space-y-6">
-          {paragraphs.map((paragraph) => (
+          {page.body.map((paragraph) => (
             <p
-              key={paragraph.slice(0, 32)}
+              key={paragraph._key}
               className="font-sans text-base leading-relaxed text-black/80"
             >
-              {paragraph}
+              {paragraph.text}
             </p>
           ))}
         </div>

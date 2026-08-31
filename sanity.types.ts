@@ -113,6 +113,38 @@ export type Slug = {
   source?: string;
 };
 
+export type ContactPage = {
+  _id: string;
+  _type: "contactPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heading?: string;
+  introduction?: string;
+  email?: string;
+  enquiryLinks?: Array<{
+    label?: string;
+    subject?: string;
+    _type: "enquiryLink";
+    _key: string;
+  }>;
+};
+
+export type AboutPage = {
+  _id: string;
+  _type: "aboutPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heading?: string;
+  introduction?: string;
+  body?: Array<{
+    text?: string;
+    _type: "paragraph";
+    _key: string;
+  }>;
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -232,6 +264,8 @@ export type AllSanitySchemaTypes =
   | SourceReference
   | Narrative
   | Slug
+  | ContactPage
+  | AboutPage
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -242,6 +276,72 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
+
+// Source: ../nara/sanity/queries.ts
+// Variable: ABOUT_PAGE_QUERY
+// Query: *[_id == "aboutPage"][0] {    heading,    introduction,    "body": coalesce(body[]{_key, text}, [])  }
+export type ABOUT_PAGE_QUERY_RESULT =
+  | {
+      heading: null;
+      introduction: null;
+      body:
+        | Array<{
+            _key: string;
+            text: null;
+          }>
+        | Array<never>;
+    }
+  | {
+      heading: string | null;
+      introduction: string | null;
+      body:
+        | Array<{
+            _key: string;
+            text: string | null;
+          }>
+        | Array<never>;
+    }
+  | {
+      heading: null;
+      introduction: null;
+      body: Array<never>;
+    }
+  | {
+      heading: string | null;
+      introduction: string | null;
+      body: Array<never>;
+    }
+  | null;
+
+// Source: ../nara/sanity/queries.ts
+// Variable: CONTACT_PAGE_QUERY
+// Query: *[_id == "contactPage"][0] {    heading,    introduction,    email,    "enquiryLinks": coalesce(enquiryLinks[]{_key, label, subject}, [])  }
+export type CONTACT_PAGE_QUERY_RESULT =
+  | {
+      heading: null;
+      introduction: null;
+      email: null;
+      enquiryLinks: Array<never>;
+    }
+  | {
+      heading: string | null;
+      introduction: string | null;
+      email: null;
+      enquiryLinks: Array<never>;
+    }
+  | {
+      heading: string | null;
+      introduction: string | null;
+      email: string | null;
+      enquiryLinks:
+        | Array<{
+            _key: string;
+            label: string | null;
+            subject: string | null;
+          }>
+        | Array<never>;
+    }
+  | null;
 
 // Source: ../nara/sanity/queries.ts
 // Variable: NARRATIVES_QUERY
@@ -314,6 +414,8 @@ export type NARRATIVE_BY_SLUG_QUERY_RESULT = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    '\n  *[_id == "aboutPage"][0] {\n    heading,\n    introduction,\n    "body": coalesce(body[]{_key, text}, [])\n  }\n': ABOUT_PAGE_QUERY_RESULT;
+    '\n  *[_id == "contactPage"][0] {\n    heading,\n    introduction,\n    email,\n    "enquiryLinks": coalesce(enquiryLinks[]{_key, label, subject}, [])\n  }\n': CONTACT_PAGE_QUERY_RESULT;
     '\n  *[_type == "narrative" && defined(slug.current)]\n  | order(name asc) {\n    _id,\n    "id": slug.current,\n    "slug": slug.current,\n    name,\n    "overview": coalesce(overview, ""),\n    "countries": coalesce(countries, []),\n    "parties": coalesce(parties[]{_key, name, iso}, []),\n    "accentColor": coalesce(accentColor, "#9B6B6B"),\n    "keywords": coalesce(keywords, []),\n    "relatedIds": coalesce(relatedNarratives[]->slug.current, []),\n    "sourceCount": count(sources)\n  }\n': NARRATIVES_QUERY_RESULT;
     '\n  *[_type == "narrative" && slug.current == $slug][0] {\n    _id,\n    "id": slug.current,\n    "slug": slug.current,\n    name,\n    "overview": coalesce(overview, ""),\n    "countries": coalesce(countries, []),\n    "parties": coalesce(parties[]{_key, name, iso}, []),\n    "accentColor": coalesce(accentColor, "#9B6B6B"),\n    "keywords": coalesce(keywords, []),\n    "relatedIds": coalesce(relatedNarratives[]->slug.current, []),\n    "sourceCount": count(sources),\n    "related": coalesce(relatedNarratives[]->{\n      _id,\n      "id": slug.current,\n      "slug": slug.current,\n      name,\n      "overview": coalesce(overview, ""),\n      "countries": coalesce(countries, []),\n      "parties": coalesce(parties[]{_key, name, iso}, []),\n      "accentColor": coalesce(accentColor, "#9B6B6B"),\n      "keywords": coalesce(keywords, []),\n      "relatedIds": coalesce(relatedNarratives[]->slug.current, []),\n      "sourceCount": count(sources)\n    }, [])\n  }\n': NARRATIVE_BY_SLUG_QUERY_RESULT;
   }
