@@ -6,7 +6,8 @@ import { getContactPage } from "@/sanity/pages";
 
 export const metadata: Metadata = {
   title: "Contact — NARA",
-  description: "Get in touch with NARA for research, collaboration, or media enquiries.",
+  description:
+    "Get in touch with NARA for research, collaboration, media enquiries, or questions about the European Narrative Atlas.",
 };
 
 export default async function ContactPage() {
@@ -28,11 +29,14 @@ export default async function ContactPage() {
           <h1 className="font-serif text-4xl leading-tight tracking-tight text-black sm:text-5xl">
             {page.heading}
           </h1>
+          <p className="mt-4 font-sans text-base leading-relaxed text-black/70">
+            {page.subheading}
+          </p>
         </header>
 
         <div className="mt-8 space-y-6">
           <p className="font-sans text-base leading-relaxed text-black/80">
-            {page.introduction}
+            {page.bodyText}
           </p>
 
           <p>
@@ -44,18 +48,11 @@ export default async function ContactPage() {
             </a>
           </p>
 
-          <ul className="space-y-3 pt-2">
-            {page.enquiryLinks.map(({ _key, label, subject }) => (
-              <li key={_key}>
-                <a
-                  href={`mailto:${page.email}?subject=${encodeURIComponent(subject)}`}
-                  className="font-sans text-base text-black/80 underline decoration-black/20 underline-offset-4 transition-colors hover:text-black hover:decoration-black/40"
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {page.location ? (
+            <p className="font-sans text-base leading-relaxed text-black/70">
+              {page.location}
+            </p>
+          ) : null}
         </div>
       </article>
     </div>

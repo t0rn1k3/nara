@@ -9,9 +9,23 @@ export type AboutPageContent = {
 
 export type ContactPageContent = {
   heading: string
-  introduction: string
+  subheading: string
+  bodyText: string
   email: string
-  enquiryLinks: Array<{_key: string; label: string; subject: string}>
+  location: string
+}
+
+function parseContactIntroduction(introduction: string) {
+  const parts = introduction
+    .split(/\n\n+/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+
+  return {
+    subheading: parts[0] ?? '',
+    bodyText: parts[1] ?? '',
+    location: parts[2] ?? '',
+  }
 }
 
 const defaultAboutPage: AboutPageContent = {
@@ -38,15 +52,16 @@ const defaultAboutPage: AboutPageContent = {
   ],
 }
 
+const defaultContactIntroduction = [
+  'Get in touch with NARA',
+  'For research enquiries, collaboration proposals, media enquiries or questions about the European Narrative Atlas, please contact us at:',
+  'Based in Prague, Czechia',
+].join('\n\n')
+
 const defaultContactPage: ContactPageContent = {
-  heading: 'Contact NARA',
-  introduction: 'For research enquiries, collaboration, media enquiries or other questions:',
-  email: 'contact@example.com',
-  enquiryLinks: [
-    {_key: 'research', label: 'Research collaborations', subject: 'Research collaboration enquiry'},
-    {_key: 'media', label: 'Media enquiries', subject: 'Media enquiry'},
-    {_key: 'general', label: 'General enquiries', subject: 'General enquiry'},
-  ],
+  heading: 'CONTACT NARA',
+  ...parseContactIntroduction(defaultContactIntroduction),
+  email: 'theatlasnara@gmail.com',
 }
 
 const fetchOptions = {next: {revalidate: 30}}
@@ -67,19 +82,19 @@ export async function getAboutPage(): Promise<AboutPageContent> {
 }
 
 export async function getContactPage(): Promise<ContactPageContent> {
-  const page = await client.fetch<Partial<ContactPageContent> | null>(
+  const page = await client.fetch<{heading?: string; introduction?: string; email?: string} | null>(
     CONTACT_PAGE_QUERY,
     {},
     fetchOptions,
   )
-  const enquiryLinks = page?.enquiryLinks?.filter(
-    (link) => link._key && link.label && link.subject,
-  )
+  const introduction = page?.introduction || defaultContactIntroduction
+  const parsedIntroduction = parseContactIntroduction(introduction)
 
   return {
     heading: page?.heading || defaultContactPage.heading,
-    introduction: page?.introduction || defaultContactPage.introduction,
+    subheading: parsedIntroduction.subheading || defaultContactPage.subheading,
+    bodyText: parsedIntroduction.bodyText || defaultContactPage.bodyText,
     email: page?.email || defaultContactPage.email,
-    enquiryLinks: enquiryLinks?.length ? enquiryLinks : defaultContactPage.enquiryLinks,
+    location: parsedIntroduction.location || defaultContactPage.location,
   }
 }
