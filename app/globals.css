@@ -37,6 +37,7 @@
   --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
   --font-sans: var(--font-ibm-plex-sans), system-ui, sans-serif;
   --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  --font-cursive: var(--font-caveat), cursive;
 }
 
 body {

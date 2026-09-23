@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
+import {
+  Caveat,
+  IBM_Plex_Mono,
+  IBM_Plex_Sans,
+  Newsreader,
+} from "next/font/google";
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -19,6 +24,12 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
 export const metadata: Metadata = {
   title: "NARA — The European Narrative Atlas",
   description:
@@ -33,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${newsreader.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         {children}
