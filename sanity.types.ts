@@ -59,6 +59,44 @@ export type SourceReference = {
   [internalGroqTypeReferenceTo]?: "source";
 };
 
+export type Paragraph = {
+  text?: string;
+  _type: "paragraph";
+  _key: string;
+};
+
+export type NarrativeCountryAppearance = {
+  heading?: string;
+  countryIso?: string;
+  paragraphs?: Array<Paragraph>;
+  bullets?: Array<string>;
+  structureSteps?: Array<string>;
+  _type: "narrativeCountryAppearance";
+  _key: string;
+};
+
+export type ComparativePatternRow = {
+  countryLabel?: string;
+  mainArticulation?: string;
+  primaryThreat?: string;
+  _type: "comparativePatternRow";
+  _key: string;
+};
+
+export type ContextSpecificElement = {
+  label?: string;
+  description?: string;
+  _type: "contextSpecificElement";
+  _key: string;
+};
+
+export type RelatedTopic = {
+  title?: string;
+  description?: string;
+  _type: "relatedTopic";
+  _key: string;
+};
+
 export type Narrative = {
   _id: string;
   _type: "narrative";
@@ -95,6 +133,15 @@ export type Narrative = {
   }>;
   accentColor?: string;
   keywords?: Array<string>;
+  countryAppearances?: Array<NarrativeCountryAppearance>;
+  comparativePattern?: Array<ComparativePatternRow>;
+  commonElements?: Array<string>;
+  contextSpecificElements?: Array<ContextSpecificElement>;
+  relatedTopics?: Array<RelatedTopic>;
+  comparativeTakeaway?: string;
+  partiesNote?: string;
+  comparativePatternIntro?: string;
+  comparativePatternOutro?: string;
   relatedNarratives?: Array<
     {
       _key: string;
@@ -263,6 +310,11 @@ export type AllSanitySchemaTypes =
   | NarrativeReference
   | SourceReference
   | Narrative
+  | Paragraph
+  | NarrativeCountryAppearance
+  | ComparativePatternRow
+  | ContextSpecificElement
+  | RelatedTopic
   | Slug
   | ContactPage
   | AboutPage
@@ -387,6 +439,48 @@ export type NARRATIVE_BY_SLUG_QUERY_RESULT = {
   keywords: Array<string> | Array<never>;
   relatedIds: Array<never> | Array<string | null>;
   sourceCount: number | null;
+  partiesNote: string | "";
+  comparativePatternIntro: string | "";
+  comparativePatternOutro: string | "";
+  countryAppearances:
+    | Array<{
+        _key: string;
+        heading: string | null;
+        countryIso: string | null;
+        paragraphs:
+          | Array<{
+              _key: string;
+              text: string | null;
+            }>
+          | Array<never>;
+        bullets: Array<string> | Array<never>;
+        structureSteps: Array<string> | Array<never>;
+      }>
+    | Array<never>;
+  comparativePattern:
+    | Array<{
+        _key: string;
+        countryLabel: string | null;
+        mainArticulation: string | null;
+        primaryThreat: string | null;
+      }>
+    | Array<never>;
+  commonElements: Array<string> | Array<never>;
+  contextSpecificElements:
+    | Array<{
+        _key: string;
+        label: string | null;
+        description: string | null;
+      }>
+    | Array<never>;
+  relatedTopics:
+    | Array<{
+        _key: string;
+        title: string | null;
+        description: string | null;
+      }>
+    | Array<never>;
+  comparativeTakeaway: string | "";
   related:
     | Array<{
         _id: string;

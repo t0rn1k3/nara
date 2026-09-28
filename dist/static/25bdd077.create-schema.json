@@ -1,0 +1,700 @@
+[
+  {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "name"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "rows": 5,
+        "name": "overview",
+        "type": "text",
+        "title": "Overview / definition"
+      },
+      {
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "body",
+        "type": "array",
+        "title": "Body (legacy portable text)"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "countries",
+        "type": "array",
+        "title": "Countries (ISO codes)"
+      },
+      {
+        "of": [
+          {
+            "type": "party",
+            "title": "Political party"
+          }
+        ],
+        "name": "parties",
+        "type": "array",
+        "title": "Political parties"
+      },
+      {
+        "rows": 3,
+        "name": "partiesNote",
+        "type": "text",
+        "title": "Political parties — note"
+      },
+      {
+        "initialValue": "#9B6B6B",
+        "name": "accentColor",
+        "type": "string",
+        "title": "Accent color"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "keywords",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "type": "narrativeCountryAppearance",
+            "title": "Country appearance"
+          }
+        ],
+        "name": "countryAppearances",
+        "type": "array",
+        "title": "How the narrative appears"
+      },
+      {
+        "rows": 4,
+        "name": "comparativePatternIntro",
+        "type": "text",
+        "title": "Comparative pattern — introduction"
+      },
+      {
+        "rows": 3,
+        "name": "comparativePatternOutro",
+        "type": "text",
+        "title": "Comparative pattern — closing note"
+      },
+      {
+        "of": [
+          {
+            "type": "comparativePatternRow",
+            "title": "Comparative pattern row"
+          }
+        ],
+        "name": "comparativePattern",
+        "type": "array",
+        "title": "Comparative pattern"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "commonElements",
+        "type": "array",
+        "title": "Common narrative elements"
+      },
+      {
+        "of": [
+          {
+            "type": "contextSpecificElement",
+            "title": "Context-specific element"
+          }
+        ],
+        "name": "contextSpecificElements",
+        "type": "array",
+        "title": "Context-specific elements"
+      },
+      {
+        "of": [
+          {
+            "type": "relatedTopic",
+            "title": "Related topic"
+          }
+        ],
+        "name": "relatedTopics",
+        "type": "array",
+        "title": "Related narrative topics"
+      },
+      {
+        "rows": 4,
+        "name": "comparativeTakeaway",
+        "type": "text",
+        "title": "Comparative takeaway"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "narrative"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to narrative"
+          }
+        ],
+        "name": "relatedNarratives",
+        "type": "array",
+        "title": "Related narratives"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "source"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to source"
+          }
+        ],
+        "name": "sources",
+        "type": "array"
+      }
+    ],
+    "name": "narrative",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "name": "url",
+        "type": "url",
+        "title": "URL"
+      },
+      {
+        "name": "publisher",
+        "type": "string"
+      },
+      {
+        "name": "publishedAt",
+        "type": "date",
+        "title": "Published at"
+      },
+      {
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "notes",
+        "type": "array"
+      }
+    ],
+    "name": "source",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "name": "introduction",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "type": "paragraph"
+          }
+        ],
+        "name": "body",
+        "type": "array"
+      }
+    ],
+    "name": "aboutPage",
+    "type": "document",
+    "title": "About page"
+  },
+  {
+    "fields": [
+      {
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "name": "introduction",
+        "type": "text"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "type": "enquiryLink",
+            "title": "Enquiry link"
+          }
+        ],
+        "name": "enquiryLinks",
+        "type": "array",
+        "title": "Enquiry links"
+      }
+    ],
+    "name": "contactPage",
+    "type": "document",
+    "title": "Contact page"
+  },
+  {
+    "fields": [
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "title": "Email subject"
+      }
+    ],
+    "name": "enquiryLink",
+    "type": "object",
+    "title": "Enquiry link"
+  },
+  {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "length",
+                "constraint": 2
+              },
+              {
+                "flag": "stringCasing",
+                "constraint": "uppercase"
+              }
+            ]
+          }
+        ],
+        "name": "iso",
+        "type": "string",
+        "title": "Country ISO code"
+      }
+    ],
+    "name": "party",
+    "type": "object",
+    "title": "Political party"
+  },
+  {
+    "fields": [
+      {
+        "rows": 4,
+        "name": "text",
+        "type": "text"
+      }
+    ],
+    "name": "paragraph",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "description": "e.g. Germany — AfD",
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "length",
+                "constraint": 2
+              },
+              {
+                "flag": "stringCasing",
+                "constraint": "uppercase"
+              }
+            ]
+          }
+        ],
+        "name": "countryIso",
+        "type": "string",
+        "title": "Country ISO code"
+      },
+      {
+        "of": [
+          {
+            "type": "paragraph"
+          }
+        ],
+        "name": "paragraphs",
+        "type": "array",
+        "title": "Body"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "bullets",
+        "type": "array",
+        "title": "Bullet points"
+      },
+      {
+        "description": "Ordered steps from cause to policy response",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "structureSteps",
+        "type": "array",
+        "title": "Narrative structure"
+      }
+    ],
+    "name": "narrativeCountryAppearance",
+    "type": "object",
+    "title": "Country appearance"
+  },
+  {
+    "fields": [
+      {
+        "name": "countryLabel",
+        "type": "string",
+        "title": "Country / actor"
+      },
+      {
+        "name": "mainArticulation",
+        "type": "string",
+        "title": "Main articulation"
+      },
+      {
+        "name": "primaryThreat",
+        "type": "string",
+        "title": "Primary threat"
+      }
+    ],
+    "name": "comparativePatternRow",
+    "type": "object",
+    "title": "Comparative pattern row"
+  },
+  {
+    "fields": [
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "description",
+        "type": "text"
+      }
+    ],
+    "name": "contextSpecificElement",
+    "type": "object",
+    "title": "Context-specific element"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "description",
+        "type": "text"
+      }
+    ],
+    "name": "relatedTopic",
+    "type": "object",
+    "title": "Related topic"
+  }
+]

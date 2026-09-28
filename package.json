@@ -6,15 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "patch:anti-immigration": "node scripts/patch-anti-immigration-narrative.mjs",
+    "sanity:deploy": "sanity deploy"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^6.16.0",
     "d3-geo": "^3.1.1",
     "next": "16.2.12",
     "next-sanity": "^13.3.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "sanity": "^6.16.0",
+    "styled-components": "^6.5.3",
     "topojson-client": "^3.1.0",
     "world-atlas": "^2.0.2"
   },
