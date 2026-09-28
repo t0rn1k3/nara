@@ -190,7 +190,7 @@ const extendedFields = {
           'In Georgia, the available evidence points primarily to a migration-control and foreign-labour dimension, rather than to a clearly documented anti-Islamic narrative.',
         ),
         paragraph(
-          'In June 2025, Georgian Dream introduced legislation aimed at tightening the employment of foreign nationals, citing concerns about labour-market saturation and unregulated migration. The explanatory note referred to an “influx of unqualified or surplus labor” and argued that this was negatively affecting the domestic workforce and labour-market conditions.',
+          'In June 2025, Georgian Dream introduced legislation aimed at tightening the employment of foreign nationals, citing concerns about labour-market saturation and unregulated migration. The explanatory note referred to an “influx of unqualified or surplus labor” and argued that this was negatively affecting the domestic workforce and labour-market conditions. The proposed framework included:',
         ),
         paragraph(
           'The proposal therefore represents a narrative in which unregulated migration and foreign labour are framed as a potential problem for the domestic population and labour market, with the state seeking greater control over which foreign nationals can work in Georgia and under what conditions.',
@@ -341,12 +341,8 @@ const extendedFields = {
     'The anti-immigration narrative travels across political and geographic contexts, but its articulation changes according to the domestic political environment. In Germany and Sweden, migration is strongly connected to cultural identity and Islam/Islamism; in Hungary, it is closely linked to sovereignty, borders, demographic preservation and the protection of a Christian national identity; while in Georgia, the documented formulation centres more directly on foreign labour, unregulated migration and state control over access to the labour market.',
 }
 
-const listFieldsIfMissing = {
-  keywords: extendedFields.keywords,
-}
-
 const doc = await client.fetch(
-  `*[_type == "narrative" && slug.current == $slug][0]{ _id, overview, name, accentColor }`,
+  `*[_type == "narrative" && slug.current == $slug][0]{ _id }`,
   {slug: SLUG},
 )
 
@@ -355,14 +351,14 @@ if (!doc?._id) {
   process.exit(1)
 }
 
-const setIfMissing = {}
-if (!doc.overview?.trim()) {
-  setIfMissing.overview = definition
-}
+const draftId = `drafts.${doc._id}`
 
 await client
   .patch(doc._id)
   .set({
+    name: 'Anti-immigration / anti-Islamic narratives',
+    overview: definition,
+    keywords: extendedFields.keywords,
     countries: extendedFields.countries,
     parties: extendedFields.parties,
     partiesNote: extendedFields.partiesNote,
@@ -375,9 +371,30 @@ await client
     relatedTopics: extendedFields.relatedTopics,
     comparativeTakeaway: extendedFields.comparativeTakeaway,
   })
-  .setIfMissing({...setIfMissing, ...listFieldsIfMissing})
   .commit()
 
-console.log(
-  `Patched narrative ${doc._id} (${SLUG}). Overview and keywords were left unchanged unless empty.`,
+try {
+  await client.delete(draftId)
+} catch {
+  // no stale draft
+}
+
+const summary = await client.fetch(
+  `*[_id == $id][0]{
+    name,
+    "overviewPreview": overview[0..80],
+    "keywordCount": count(keywords),
+    "appearances": countryAppearances[]{heading, "paragraphs": count(paragraphs), "bullets": count(bullets), "steps": count(structureSteps)}
+  }`,
+  {id: doc._id},
 )
+
+console.log(`Patched narrative ${doc._id} on ${projectId}/${dataset} (slug: ${SLUG}).`)
+console.log(JSON.stringify(summary, null, 2))
+console.log(`
+In Studio: Narrative → "${summary.name}" → scroll to:
+  • Overview / definition
+  • Keywords, Countries, Political parties
+  • How the narrative appears (4 country blocks — NOT "Body legacy")
+  • Comparative pattern, Common elements, Related narrative topics
+`)
