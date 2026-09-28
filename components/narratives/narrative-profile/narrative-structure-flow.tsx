@@ -14,7 +14,7 @@ export function NarrativeStructureFlow({ steps }: NarrativeStructureFlowProps) {
           </p>
           {index < steps.length - 1 ? (
             <div
-              className="flex justify-center border-t border-black/10 py-1.5 font-mono text-sm text-black/35"
+              className="flex justify-start border-t border-black/10 px-4 py-1.5 font-mono text-sm text-black/35"
               aria-hidden
             >
               ↓
