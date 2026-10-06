@@ -184,9 +184,22 @@ function toNarrative(
   }
 }
 
+const PRIORITY_LIST_SLUG = 'anti-immigration'
+
+function withPriorityNarrativeFirst(narratives: Narrative[]): Narrative[] {
+  const index = narratives.findIndex((n) => n.slug === PRIORITY_LIST_SLUG)
+  if (index <= 0) return narratives
+  const reordered = [...narratives]
+  const [priority] = reordered.splice(index, 1)
+  reordered.unshift(priority)
+  return reordered
+}
+
 export async function getNarratives(): Promise<Narrative[]> {
   const result = await client.fetch(NARRATIVES_QUERY, {}, fetchOptions)
-  return result.map((item: NarrativeProjection) => toNarrative(item))
+  return withPriorityNarrativeFirst(
+    result.map((item: NarrativeProjection) => toNarrative(item)),
+  )
 }
 
 export async function getNarrativeBySlug(
