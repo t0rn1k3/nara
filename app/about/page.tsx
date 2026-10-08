@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SiteHeader } from "@/components/site-header";
+import { createPageMetadata } from "@/lib/seo";
 import { getAboutPage } from "@/sanity/pages";
 
-export const metadata: Metadata = {
-  title: "About — NARA",
+export const metadata: Metadata = createPageMetadata({
+  title: "About",
   description:
     "NARA is an independent research initiative focused on political narratives across Europe and its wider neighbourhood.",
-};
+  path: "/about",
+});
 
 export default async function AboutPage() {
   const page = await getAboutPage();

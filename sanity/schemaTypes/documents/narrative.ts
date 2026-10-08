@@ -17,6 +17,12 @@ export const narrative = defineType({
       title: 'Overview / definition',
       type: 'text',
       rows: 5,
+      validation: (Rule) =>
+        Rule.required()
+          .min(120)
+          .error(
+            'Add a substantive overview of at least 120 characters before publishing.',
+          ),
     }),
     defineField({
       name: 'body',
@@ -113,6 +119,10 @@ export const narrative = defineType({
       title: 'Sources',
       type: 'array',
       of: [defineArrayMember({type: 'reference', to: [{type: 'source'}]})],
+      validation: (Rule) =>
+        Rule.required()
+          .min(1)
+          .error('Add at least one source before publishing.'),
     }),
   ],
   preview: {

@@ -19,6 +19,7 @@ type RelatedNarrativeProjection = NarrativeDetail['related'][number]
 
 type NarrativeDetailFields = Pick<
   Narrative,
+  | 'sources'
   | 'partiesNote'
   | 'countryAppearances'
   | 'comparativePatternIntro'
@@ -31,6 +32,7 @@ type NarrativeDetailFields = Pick<
 >
 
 const emptyDetailFields: NarrativeDetailFields = {
+  sources: [],
   partiesNote: '',
   countryAppearances: [],
   comparativePatternIntro: '',
@@ -40,6 +42,26 @@ const emptyDetailFields: NarrativeDetailFields = {
   contextSpecificElements: [],
   relatedTopics: [],
   comparativeTakeaway: '',
+}
+
+function mapSources(
+  value: NarrativeDetail['sources'] | undefined,
+): Narrative['sources'] {
+  if (!value?.length) return []
+
+  return value.flatMap((source) => {
+    if (!source._id || !source.title || !source.url) return []
+
+    return [
+      {
+        id: source._id,
+        title: source.title,
+        url: source.url,
+        publisher: source.publisher ?? '',
+        publishedAt: source.publishedAt ?? '',
+      },
+    ]
+  })
 }
 
 function mapCountryAppearances(
@@ -124,6 +146,7 @@ function mapRelatedTopics(
 
 function detailFieldsFrom(value: NarrativeDetail): NarrativeDetailFields {
   return {
+    sources: mapSources(value.sources),
     partiesNote: value.partiesNote ?? '',
     countryAppearances: mapCountryAppearances(value.countryAppearances),
     comparativePatternIntro: value.comparativePatternIntro ?? '',

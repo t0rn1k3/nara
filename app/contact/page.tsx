@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SiteHeader } from "@/components/site-header";
+import { createPageMetadata } from "@/lib/seo";
 import { getContactPage } from "@/sanity/pages";
 
-export const metadata: Metadata = {
-  title: "Contact — NARA",
+export const metadata: Metadata = createPageMetadata({
+  title: "Contact",
   description:
     "Get in touch with NARA for research, collaboration, media enquiries, or questions about the European Narrative Atlas.",
-};
+  path: "/contact",
+});
 
 export default async function ContactPage() {
   const page = await getContactPage();

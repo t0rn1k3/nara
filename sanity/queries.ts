@@ -32,6 +32,13 @@ const narrativeListFields = `
 `
 
 const narrativeDetailFields = `
+    "sources": coalesce(sources[]->{
+      _id,
+      title,
+      url,
+      publisher,
+      publishedAt
+    }, []),
     "partiesNote": coalesce(partiesNote, ""),
     "comparativePatternIntro": coalesce(comparativePatternIntro, ""),
     "comparativePatternOutro": coalesce(comparativePatternOutro, ""),

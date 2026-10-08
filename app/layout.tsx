@@ -5,6 +5,15 @@ import {
   IBM_Plex_Sans,
   Newsreader,
 } from "next/font/google";
+
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE,
+  serializeJsonLd,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
+
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -31,9 +40,67 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "NARA — The European Narrative Atlas",
-  description:
-    "Independent geopolitical research platform mapping political narratives across Europe.",
+  metadataBase: SITE_URL,
+  title: {
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  category: "research",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    url: "/",
+    siteName: SITE_NAME,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: DEFAULT_TITLE,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: ["/opengraph-image"],
+  },
+};
+
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}#organization`,
+      name: SITE_NAME,
+      url: SITE_URL.toString(),
+      description: DEFAULT_DESCRIPTION,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}#website`,
+      name: DEFAULT_TITLE,
+      url: SITE_URL.toString(),
+      description: DEFAULT_DESCRIPTION,
+      publisher: {
+        "@id": `${SITE_URL}#organization`,
+      },
+      inLanguage: "en",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -47,6 +114,10 @@ export default function RootLayout({
       className={`${newsreader.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteJsonLd) }}
+        />
         {children}
       </body>
     </html>

@@ -36,6 +36,14 @@ export type RelatedTopic = {
   description: string;
 };
 
+export type NarrativeSource = {
+  id: string;
+  title: string;
+  url: string;
+  publisher: string;
+  publishedAt: string;
+};
+
 export type Narrative = {
   id: string;
   slug: string;
@@ -48,6 +56,7 @@ export type Narrative = {
   keywords: string[];
   relatedIds: string[];
   sourceCount: number;
+  sources: NarrativeSource[];
   countryAppearances: NarrativeCountryAppearance[];
   comparativePatternIntro: string;
   comparativePatternOutro: string;

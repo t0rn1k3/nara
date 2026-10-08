@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SiteHeader } from "@/components/site-header";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Research — NARA",
+export const metadata: Metadata = createPageMetadata({
+  title: "Research",
   description:
     "NARA examines how political narratives emerge, circulate and evolve across Europe and its wider neighbourhood.",
-};
+  path: "/research",
+});
 
 const sections = [
   {

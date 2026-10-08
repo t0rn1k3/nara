@@ -47,6 +47,17 @@ function BodyParagraphs({
   );
 }
 
+function formatSourceDate(value: string): string {
+  if (!value) return "";
+
+  return new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${value}T00:00:00Z`));
+}
+
 export function NarrativeProfile({
   narrative,
   related,
@@ -296,6 +307,36 @@ export function NarrativeProfile({
               <p className="max-w-prose font-sans text-base leading-relaxed text-black/80">
                 {narrative.comparativeTakeaway}
               </p>
+            </ProfileSection>
+          ) : null}
+
+          {narrative.sources.length > 0 ? (
+            <ProfileSection title="Sources">
+              <ol className="divide-y divide-black/15 border border-black/15">
+                {narrative.sources.map((source) => {
+                  const publishedAt = formatSourceDate(source.publishedAt);
+
+                  return (
+                    <li key={source.id} className="px-4 py-4">
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-sans text-base font-medium text-black underline decoration-black/30 underline-offset-4 transition-colors hover:decoration-black"
+                      >
+                        {source.title}
+                      </a>
+                      {source.publisher || publishedAt ? (
+                        <p className="mt-1 font-mono text-[10px] leading-relaxed tracking-wide text-black/55 uppercase">
+                          {[source.publisher, publishedAt]
+                            .filter(Boolean)
+                            .join(" · ")}
+                        </p>
+                      ) : null}
+                    </li>
+                  );
+                })}
+              </ol>
             </ProfileSection>
           ) : null}
 

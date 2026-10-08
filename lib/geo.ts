@@ -99,6 +99,15 @@ const CAPITAL_MARKER_OFFSETS: Partial<
     dx: NARA_VIEWBOX.width * 0.02,
     dy: -NARA_VIEWBOX.height * 0.02,
   },
+  SI: {
+    dx: -NARA_VIEWBOX.width * 0.005,
+    dy: -NARA_VIEWBOX.height * 0.01,
+  },
+  HR: {
+    // ~15 CSS px left at typical atlas scale (≈0.67).
+    dx: NARA_VIEWBOX.width * 0.034 - 22.5,
+    dy: NARA_VIEWBOX.height * 0.012,
+  },
 };
 
 const projection = geoMercator()
